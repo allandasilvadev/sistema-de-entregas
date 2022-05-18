@@ -1,0 +1,32 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p><%= link_to 'Voltar', carriers_path %></p>
+			<dl>
+				<dt>Razão social:</dt>
+				<dd><%= @carrier.corporate_name %></dd>
+
+				<dt>Nome fantasia:</dt>
+				<dd><%= @carrier.brand_name %></dd>
+
+				<dt>CNPJ:</dt>
+				<dd><%= @carrier.registration_number %></dd>
+
+				<dt>Endereço:</dt>
+				<dd><%= @carrier.full_address %> - <%= @carrier.city %> - <%= @carrier.state %></dd>
+
+				<dt>Domínio:</dt>
+				<dd><%= @carrier.email_domain %></dd>
+
+				<dt>Status:</dt>
+				<dd>
+					<% if @carrier.activated %>
+					  activated
+					<% else %>
+					  deactivated
+					<% end %>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>

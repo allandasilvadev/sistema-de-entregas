@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="text-center">Transportadoras</h1>
+			<p>
+				<%= link_to 'Voltar', root_path %>
+			</p>
+
+			<% if @carriers.empty? %>
+				<p>Não existem transportadoras cadastradas.</p>
+			<% else %>
+				<% @carriers.each do |c| %>
+					<dl>
+						<dt><%= link_to c.brand_name, carrier_path(c.id) %></dt>
+						<dd><%= c.city %> - <%= c.state %></dd>
+					</dl>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>
