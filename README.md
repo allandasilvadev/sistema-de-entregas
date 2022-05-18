@@ -1,24 +1,16 @@
-# README
+# Sistema de entregas
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Esse sistema de entregas permite que um fornecedor gerencie transportadoras que farão a entrega de seus produtos.
 
-Things you may want to cover:
+#### Recursos usados nesse projeto:
 
-* Ruby version
+- Ruby 3.1.2
+- Rails 7.0.3
+- Bootstrap 3.4.1
+- jQuery
 
-* System dependencies
+## Instruções
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Entrar na pasta do projeto, usando o comando "cd"
+- Executar o comando '$rails server'
+- Acessar "http://localhost:3000"

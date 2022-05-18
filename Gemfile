@@ -18,9 +18,16 @@ gem "puma", "~> 5.0"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
+gem "bootstrap-sass", "~> 3.4.1"
+gem "sassc-rails", ">= 2.1.0"
+gem "jquery-rails"
+gem "importmap-rails", "~> 1.0", ">= 1.0.3"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "rspec-rails"
+  gem "capybara"
 end
 
 group :development do
