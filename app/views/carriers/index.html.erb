@@ -5,6 +5,9 @@
 			<p>
 				<%= link_to 'Voltar', root_path %>
 			</p>
+			<p>
+				<%= link_to 'Cadastrar Transportadora', new_carrier_path %>
+			</p>
 
 			<% if @carriers.empty? %>
 				<p>Não existem transportadoras cadastradas.</p>
