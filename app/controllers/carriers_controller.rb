@@ -23,4 +23,21 @@ class CarriersController < ApplicationController
 			render 'new'
 		end
 	end
+
+	def edit
+		@carrier = Carrier.find(params[:id])
+	end
+
+	def update
+		# strong parameters
+		carrier_params = params.require(:carrier).permit(:corporate_name, :brand_name, :registration_number, :full_address, :city, :state, :email_domain, :activated)
+		@carrier = Carrier.find(params[:id])
+		if @carrier.update(carrier_params)
+			flash[:notice] = 'Transportadora atualizada com sucesso.'
+			redirect_to carrier_path( @carrier.id )
+		else
+			flash.now[:notice] = 'Não foi possível atualizar a transportadora.'
+			render 'edit'
+		end
+	end
 end
