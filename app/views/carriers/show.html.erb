@@ -3,6 +3,7 @@
 		<div class="col-md-12">
 			<p><%= link_to 'Voltar', carriers_path %></p>
 			<p><%= link_to 'Editar', edit_carrier_path( @carrier.id ) %></p>
+			<p><%= link_to 'Habilitar/Desabilitar', disable_carrier_path( @carrier.id ) %></p>
 			<dl>
 				<dt>Razão social:</dt>
 				<dd><%= @carrier.corporate_name %></dd>

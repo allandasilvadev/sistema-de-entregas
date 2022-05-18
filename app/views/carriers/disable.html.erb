@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Habilitar/Desabilitar Transportadora</h1>
+
+
+
+			<%= form_with(model: @carrier, url: '/carriers/disable', method: :post) do |f| %>
+			  <div class="form-group">
+			  	<%= f.label :activated %><br>
+			  	<%= f.select(:activated, [['Activated', true], ['Deactivated', false]], { selected: true }, { :class => 'form-control' }) %>
+			  </div>
+
+			  <input type="hidden" name="carrier_id" id="carrier_id" value="<%= @carrier.id %>">
+
+			  <div class="form-group">
+			  	<p><%= f.submit 'Enviar', class: 'btn btn-success' %></p>
+			  </div>
+			<% end %>
+		</div>
+	</div>
+</div>

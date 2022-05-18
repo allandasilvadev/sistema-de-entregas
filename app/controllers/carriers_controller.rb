@@ -40,4 +40,21 @@ class CarriersController < ApplicationController
 			render 'edit'
 		end
 	end
+
+	def disable
+		@carrier = Carrier.find(params[:id])
+	end
+
+	def disable_post
+		# strong parameters
+		carrier_params = params.require(:carrier).permit(:activated)
+		@carrier = Carrier.find( params[:carrier_id] )
+		if @carrier.update(carrier_params)
+			flash[:notice] = 'O status da transportadora foi alterado com sucesso.'
+			redirect_to carrier_path( @carrier.id )
+		else
+			flash.now[:notice] = 'Não foi possível alterar o status da transportadora.'
+			render 'disable'
+		end
+	end
 end
