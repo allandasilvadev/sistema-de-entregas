@@ -1,0 +1,31 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Transportadora: <small><%= @vehicle.carrier.brand_name %></small></h1>
+
+			<p>
+				<%= link_to 'Voltar', vehicles_path %>
+			</p>
+			
+			<dl>
+				<dt>Modelo:</dt>
+				<dd><%= @vehicle.mockup %></dd>
+
+				<dt>Fabricante:</dt>
+				<dd><%= @vehicle.brand %></dd>
+				
+				<dt>Ano:</dt>
+				<dd><%= @vehicle.year %></dd>
+				
+				<dt>Placa:</dt>
+				<dd><%= @vehicle.plate %></dd>
+				
+				<dt>Identificador:</dt>
+				<dd><%= @vehicle.identification %></dd>
+				
+				<dt>Capacidade máxima:</dt>
+				<dd><%= @vehicle.capacity %></dd>
+			</dl>
+		</div>
+	</div>
+</div>

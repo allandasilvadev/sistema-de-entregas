@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="text-center">Veículos</h1>
+
+			<p>
+				<%= link_to 'Voltar', root_path %>
+			</p>
+
+			<% if @vehicles.empty? %>
+				<p>Não existem veículos cadastrados.</p>
+			<% else %>
+				<% @vehicles.each do |v| %>
+					<dl>
+						<dt>Modelo:</dt>
+						<dd><%= link_to v.mockup, vehicle_path(v.id) %></dd>
+
+						<dt>Placa:</dt>
+						<dd><%= v.plate %></dd>
+
+						<dt>Identificador:</dt>
+						<dd><%= v.identification %></dd>
+					</dl>
+				<% end %>
+			<% end %>
+			
+		</div>
+	</div>
+</div>
