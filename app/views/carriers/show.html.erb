@@ -31,7 +31,8 @@
 			</dl>
 
 			<p>
-				<%= link_to 'Veículos', vehicles_path %>
+				<%= link_to 'Veículos', vehicles_path( :carrier_id => @carrier.id ) %> | 
+				<%= link_to 'Cadastrar novo veículo', new_vehicle_path( :carrier_id => @carrier.id ) %>
 			</p>
 		</div>
 	</div>

@@ -2,6 +2,7 @@ pt-BR:
   activerecord:
     models:
       carrier: 'Transportadora'
+      vehicle: 'Veículo'
     attributes:
       carrier:
         corporate_name: 'Razão social'
@@ -12,3 +13,10 @@ pt-BR:
         state: 'Estado'
         email_domain: 'Domínio'
         activated: 'Status'
+      vehicle:
+        mockup: 'Modelo'
+        brand: 'Fabricante'
+        year: 'Ano'
+        plate: 'Placa'
+        identification: 'Identificador'
+        capacity: 'Capacidade máxima'
