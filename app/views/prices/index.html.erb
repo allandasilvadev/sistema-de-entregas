@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Tabela de preços</h1>
+
+			<p>
+				<%= link_to 'Voltar', carrier_path( @carrier.id )%>
+			</p>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Metros cúbicos</th>
+						<th>Peso</th>
+						<th>Valor por km</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if @prices.empty? %>
+						<tr>
+							<td colspan="3">
+								<p>Não existem preços cadastrados para essa transportadora.</p>
+							</td>
+						</tr>
+
+					<% else %>
+					  <% @prices.each do |p| %>
+					    <% 
+					    	cubic_meter_min = p.cubic_meter_min.to_f / 100
+					    	cubic_meter_max = p.cubic_meter_max.to_f / 100
+					    	minimum_weight = p.minimum_weight.to_f / 1000 
+					    	maximum_weight = p.maximum_weight.to_f / 1000					    	
+					    	km_price = p.km_price.to_f / 100
+					    %>
+					    <tr>
+					    	<td><%= cubic_meter_min %>cm3 a <%= cubic_meter_max %>cm3</td>
+					    	<td><%= "%g" % minimum_weight %>kg a <%= "%g" % maximum_weight %>kg</td>
+					    	<td>R$ <%= "%.2f" % km_price %></td>
+					    </tr>
+					  <% end %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

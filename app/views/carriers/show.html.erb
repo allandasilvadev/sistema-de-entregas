@@ -34,6 +34,10 @@
 				<%= link_to 'Veículos', vehicles_path( :carrier_id => @carrier.id ) %> | 
 				<%= link_to 'Cadastrar novo veículo', new_vehicle_path( :carrier_id => @carrier.id ) %>
 			</p>
+
+			<p>
+				<%= link_to 'Consultar preços', prices_path( :carrier_id => @carrier.id ) %>
+			</p>
 		</div>
 	</div>
 </div>

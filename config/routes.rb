@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   post '/carriers/disable', to: 'carriers#disable_post', as: 'disable_carrier_post'
 
   resources :vehicles, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+
+  resources :prices, only: [:index]
 end
