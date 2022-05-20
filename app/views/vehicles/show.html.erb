@@ -4,6 +4,11 @@
 			<h1>Transportadora: <small><%= @vehicle.carrier.brand_name %></small></h1>
 
 			<p>
+				<%= link_to 'Editar', edit_vehicle_path( @vehicle.id ) %> | 
+				<p><%= button_to('Remover', vehicle_path( @vehicle.id, carrier_id: @vehicle.carrier.id ), method: :delete) %></p>
+			</p>			
+
+			<p>
 				<%= link_to 'Voltar', vehicles_path %>
 			</p>
 			

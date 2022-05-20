@@ -1,0 +1,48 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Transportadora: <%= @vehicle.carrier.brand_name %></h1>
+			<h4>Editar veículo</h4>
+
+			<p><%= link_to 'Voltar', vehicles_path %></p>
+
+			<%= form_with(model: @vehicle) do |f| %>
+				<div class="form-group">
+					<%= f.label :mockup %>
+					<%= f.text_field :mockup, class: 'form-control' %>
+				</div>
+
+				<div class="form-group">
+					<%= f.label :brand %>
+					<%= f.text_field :brand, class: 'form-control' %>
+				</div>
+
+				<div class="form-group">
+					<%= f.label :year %>
+					<%= f.text_field :year, class: 'form-control' %>
+				</div>
+
+				<div class="form-group">
+					<%= f.label :plate %>
+					<%= f.text_field :plate, class: 'form-control' %>
+				</div>
+
+				<div class="form-group">
+					<%= f.label :identification %>
+					<%= f.text_field :identification, class: 'form-control' %>
+				</div>
+
+				<div class="form-group">
+					<%= f.label :capacity %>
+					<%= f.text_field :capacity, class: 'form-control' %>
+				</div>
+
+				<%= f.hidden_field :carrier_id, value: @vehicle.carrier.id %>
+
+				<div>
+					<%= f.submit 'Enviar', class: 'btn btn-success' %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

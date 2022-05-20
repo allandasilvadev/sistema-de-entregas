@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   get '/carriers/:id/disable', to: 'carriers#disable', as: 'disable_carrier'
   post '/carriers/disable', to: 'carriers#disable_post', as: 'disable_carrier_post'
 
-  resources :vehicles, only: [:index, :show, :new, :create]
+  resources :vehicles, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 end
