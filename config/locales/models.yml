@@ -3,6 +3,7 @@ pt-BR:
     models:
       carrier: 'Transportadora'
       vehicle: 'Veículo'
+      price: 'Preço'
     attributes:
       carrier:
         corporate_name: 'Razão social'
@@ -20,3 +21,9 @@ pt-BR:
         plate: 'Placa'
         identification: 'Identificador'
         capacity: 'Capacidade máxima'
+      price:
+        cubic_meter_min: 'Tamanho minímo em centímetros cúbicos' 
+        cubic_meter_max: 'Tamanho máximo em centímetros cúbicos'
+        minimum_weight: 'Peso minímo em gramas'
+        maximum_weight: 'Peso máximo em gramas'
+        km_price: 'Preço por quilômetro em centavos'

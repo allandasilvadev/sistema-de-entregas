@@ -36,7 +36,8 @@
 			</p>
 
 			<p>
-				<%= link_to 'Consultar preços', prices_path( :carrier_id => @carrier.id ) %>
+				<%= link_to 'Consultar preços', prices_path( :carrier_id => @carrier.id ) %> | 
+				<%= link_to 'Cadastrar nova faixa de preço', new_price_path( :carrier_id => @carrier.id ) %>
 			</p>
 		</div>
 	</div>
