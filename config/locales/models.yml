@@ -4,6 +4,7 @@ pt-BR:
       carrier: 'Transportadora'
       vehicle: 'Veículo'
       price: 'Preço'
+      term: 'Prazo'
     attributes:
       carrier:
         corporate_name: 'Razão social'
@@ -27,3 +28,7 @@ pt-BR:
         minimum_weight: 'Peso minímo em gramas'
         maximum_weight: 'Peso máximo em gramas'
         km_price: 'Preço por quilômetro em centavos'
+      term:
+        minimum_distance: 'Distância miníma em metros'
+        maximum_distance: 'Distância máxima em metros'
+        days: 'Dias úteis'
