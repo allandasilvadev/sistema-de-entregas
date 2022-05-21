@@ -1,0 +1,41 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Transportadora: <%= @carrier.brand_name %></h1>
+			<h3>Tabela de prazos</h3>
+
+			<p>
+				<%= link_to 'Voltar', carrier_path( @carrier.id )%>
+			</p>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Distância</th>
+						<th>Dias</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if @terms.empty? %>
+					<tr>
+						<td colspan="2">
+							<p>Não existem prazos cadastrados para esta transportadora.</p>
+						</td>
+					</tr>
+					<% else %>
+					  <% @terms.each do |t| %>
+					  <%
+					  	minimum_distance = t.minimum_distance.to_f / 1000
+					  	maximum_distance = t.maximum_distance.to_f / 1000
+					  %>
+					  <tr>
+					  	<td><%= "%g" % minimum_distance %>km a <%= "%g" % maximum_distance %>km</td>
+					  	<td><%= t.days %> dias úteis</td>
+					  </tr>
+					  <% end %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

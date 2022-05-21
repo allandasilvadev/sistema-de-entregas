@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_20_212113) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_21_141131) do
   create_table "carriers", force: :cascade do |t|
     t.string "corporate_name"
     t.string "brand_name"
@@ -36,6 +36,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_212113) do
     t.index ["carrier_id"], name: "index_prices_on_carrier_id"
   end
 
+  create_table "terms", force: :cascade do |t|
+    t.integer "minimum_distance"
+    t.integer "maximum_distance"
+    t.integer "days"
+    t.integer "carrier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrier_id"], name: "index_terms_on_carrier_id"
+  end
+
   create_table "vehicles", force: :cascade do |t|
     t.string "plate"
     t.string "identification"
@@ -50,5 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_212113) do
   end
 
   add_foreign_key "prices", "carriers"
+  add_foreign_key "terms", "carriers"
   add_foreign_key "vehicles", "carriers"
 end
