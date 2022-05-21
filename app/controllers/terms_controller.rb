@@ -22,4 +22,21 @@ class TermsController < ApplicationController
 			render 'new', locals: {  carrier: @carrier }
 		end
 	end
+
+	def edit
+		@term = Term.find(params[:id])
+	end
+
+	def update
+		# strong parameters
+		term_params = params.require(:term).permit(:minimum_distance, :maximum_distance, :days, :carrier_id)		
+		@term = Term.find(params[:id])
+		if @term.update(term_params)
+			flash[:notice] = 'Prazo atualizado com sucesso.'
+			redirect_to terms_path( carrier_id: params[:term][:carrier_id] )
+		else
+			flash.now[:notice] = 'Não foi possível atualizar o prazo.'
+			render 'edit'
+		end
+	end
 end

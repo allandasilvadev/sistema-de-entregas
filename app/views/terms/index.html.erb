@@ -13,12 +13,13 @@
 					<tr>
 						<th>Distância</th>
 						<th>Dias</th>
+						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody>
 					<% if @terms.empty? %>
 					<tr>
-						<td colspan="2">
+						<td colspan="3">
 							<p>Não existem prazos cadastrados para esta transportadora.</p>
 						</td>
 					</tr>
@@ -31,6 +32,9 @@
 					  <tr>
 					  	<td><%= "%g" % minimum_distance %>km a <%= "%g" % maximum_distance %>km</td>
 					  	<td><%= t.days %> dias úteis</td>
+					  	<td>
+					  		<%= link_to 'Editar', edit_term_path( t.id ) %>
+					  	</td>
 					  </tr>
 					  <% end %>
 					<% end %>

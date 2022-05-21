@@ -1,0 +1,43 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-8">
+			<h1>Transportadora: <%= @term.carrier.brand_name %></h1>
+			<h3>Editar prazo</h3>
+
+			<p>
+				<%= link_to 'Voltar', terms_path( carrier_id: @term.carrier.id ) %>
+			</p>
+
+			<% if @term.errors.any? %>
+				<p>Verifique os erros abaixo.</p>
+				<ul>
+					<% @term.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+					<% end %>
+				</ul>
+			<% end %>
+
+			<%= form_with(model: @term) do |f| %>
+			  <div class="form-group">
+			  	<%= f.label :minimum_distance %><br>
+			  	<%= f.text_field :minimum_distance, class: 'form-control' %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :maximum_distance %><br>
+			  	<%= f.text_field :maximum_distance, class: 'form-control' %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :days %><br>
+			  	<%= f.text_field :days, class: 'form-control' %>
+			  </div>
+
+			  <%= f.hidden_field :carrier_id, value: @term.carrier.id %>
+				<div>
+					<%= f.submit 'Enviar', class: 'btn btn-success' %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
