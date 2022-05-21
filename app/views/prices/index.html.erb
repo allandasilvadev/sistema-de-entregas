@@ -38,8 +38,9 @@
 					    	<td><%= "%g" % cubic_meter_min %>cm3 a <%= "%g" % cubic_meter_max %>cm3</td>
 					    	<td><%= "%g" % minimum_weight %>kg a <%= "%g" % maximum_weight %>kg</td>
 					    	<td>R$ <%= "%.2f" % km_price %></td>
-					    	<td>
-					    		<%= link_to 'Editar', edit_price_path( p.id ) %>
+					    	<td id="price-<%= p.id %>">
+					    		<%= link_to 'Editar', edit_price_path( p.id ) %> | 
+					    		<%= link_to 'Remover', price_path( p.id, carrier_id: p.carrier.id ), method: :delete %>
 					    	</td>
 					    </tr>
 					  <% end %>

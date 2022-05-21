@@ -39,4 +39,12 @@ class PricesController < ApplicationController
 			render 'edit'
 		end
 	end
+
+	def destroy
+		@price = Price.find(params[:id])
+    @price.destroy    
+    @prices = Price.where( carrier_id: params[:carrier_id] )
+    flash[:notice] = 'Faixa de preço excluída com sucesso.'  
+    redirect_to prices_path( carrier_id: params[:carrier_id] )
+  end
 end
