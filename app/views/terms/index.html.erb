@@ -32,8 +32,9 @@
 					  <tr>
 					  	<td><%= "%g" % minimum_distance %>km a <%= "%g" % maximum_distance %>km</td>
 					  	<td><%= t.days %> dias úteis</td>
-					  	<td>
-					  		<%= link_to 'Editar', edit_term_path( t.id ) %>
+					  	<td id="prazo-<%= t.id %>">
+					  		<%= link_to 'Editar', edit_term_path( t.id ) %> | 
+					  		<%= button_to('Remover', term_path( t.id, carrier_id: t.carrier.id ), method: :delete) %>
 					  	</td>
 					  </tr>
 					  <% end %>

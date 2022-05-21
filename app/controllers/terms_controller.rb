@@ -39,4 +39,12 @@ class TermsController < ApplicationController
 			render 'edit'
 		end
 	end
+
+	def destroy
+		@term = Term.find(params[:id])
+    @term.destroy    
+    @terms = Term.where( carrier_id: params[:carrier_id] )
+    flash[:notice] = 'Prazo excluído com sucesso.'  
+    redirect_to terms_path( carrier_id: params[:carrier_id] )
+  end
 end
