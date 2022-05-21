@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :prices, only: [:index, :new, :create, :edit, :update, :destroy]
 
   resources :terms, only: [:index, :new, :create, :edit, :update, :destroy]
+
+  resources :orders, only: [:index, :new, :create, :edit, :update, :destroy]
 end

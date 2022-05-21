@@ -44,6 +44,10 @@
 				<%= link_to 'Prazos', terms_path( :carrier_id => @carrier.id ) %> | 
 				<%= link_to 'Cadastrar novo prazo', new_term_path( :carrier_id => @carrier.id ) %>
 			</p>
+
+			<p>
+				<%= link_to 'Ordens de serviço', orders_path( :carrier_id => @carrier.id ) %>
+			</p>
 		</div>
 	</div>
 </div>

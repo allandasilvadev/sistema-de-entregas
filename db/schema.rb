@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_21_141131) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_21_211319) do
   create_table "carriers", force: :cascade do |t|
     t.string "corporate_name"
     t.string "brand_name"
@@ -22,6 +22,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_141131) do
     t.boolean "activated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "collection_address"
+    t.string "sku_product"
+    t.string "height"
+    t.string "width"
+    t.string "depth"
+    t.string "weight"
+    t.string "delivery_address"
+    t.string "recipient_name"
+    t.string "recipient_cpf"
+    t.string "status"
+    t.string "code"
+    t.integer "carrier_id", null: false
+    t.integer "vehicle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrier_id"], name: "index_orders_on_carrier_id"
+    t.index ["vehicle_id"], name: "index_orders_on_vehicle_id"
   end
 
   create_table "prices", force: :cascade do |t|
@@ -59,6 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_141131) do
     t.index ["carrier_id"], name: "index_vehicles_on_carrier_id"
   end
 
+  add_foreign_key "orders", "carriers"
+  add_foreign_key "orders", "vehicles"
   add_foreign_key "prices", "carriers"
   add_foreign_key "terms", "carriers"
   add_foreign_key "vehicles", "carriers"

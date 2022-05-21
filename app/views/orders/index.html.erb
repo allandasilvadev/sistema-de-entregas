@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h1>Transportadora: <%= @carrier.brand_name %></h1>
+			<h3>Ordens de serviço</h3>
+
+			<p>
+				<%= link_to 'Voltar', carrier_path( @carrier.id )%>
+			</p>
+
+			<% if @orders.empty? %>
+			  <div class="order-container">
+			  	<p>Não existem ordens de serviço para esta transportadora.</p>
+			  </div>
+			<% else %>
+			  <% @orders.each do |order| %>
+			    <%
+			    	volume = order.height.to_f * order.width.to_f * order.depth.to_f
+			    	volume = volume / 1000000
+
+			    	peso = order.weight.to_f / 1000
+			    %>
+			    <div class="order-container">
+			    	<h3>Código: <%= order.code %></h3>
+			    	<dl>
+			    		<dt>Endereço de coleta:</dt>
+			    		<dd><%= order.collection_address %></dd>
+
+			    		<dt>Volume:</dt>
+			    		<dd><%= "%g" % volume %>m3</dd>
+
+			    		<dt>Peso:</dt>
+			    		<dd><%= "%g" % peso %>kg</dd>
+
+			    		<dt>Endereço de entrega:</dt>
+			    		<dd><%= order.delivery_address %></dd>
+
+			    		<dt>Status:</dt>
+			    		<dd><%= order.status %></dd>
+			    	</dl>
+			    </div>
+			  <% end %>
+			<% end %>
+		</div>
+	</div>
+</div>
