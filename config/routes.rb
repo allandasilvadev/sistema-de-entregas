@@ -6,5 +6,5 @@ Rails.application.routes.draw do
 
   resources :vehicles, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
-  resources :prices, only: [:index, :new, :create]
+  resources :prices, only: [:index, :new, :create, :edit, :update]
 end

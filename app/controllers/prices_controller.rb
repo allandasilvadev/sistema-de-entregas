@@ -22,4 +22,21 @@ class PricesController < ApplicationController
 			render 'new', locals: {  carrier: @carrier }
 		end
 	end
+
+	def edit
+		@price = Price.find(params[:id])
+	end
+
+	def update
+		# strong parameters
+		price_params = params.require(:price).permit(:cubic_meter_min, :cubic_meter_max, :minimum_weight, :maximum_weight, :km_price, :carrier_id)		
+		@price = Price.find(params[:id])
+		if @price.update(price_params)
+			flash[:notice] = 'Faixa de preço atualizada com sucesso.'
+			redirect_to prices_path( carrier_id: params[:price][:carrier_id] )
+		else
+			flash.now[:notice] = 'Não foi possível atualizar a faixa de preço.'
+			render 'edit'
+		end
+	end
 end

@@ -14,12 +14,13 @@
 						<th>Metros cúbicos</th>
 						<th>Peso</th>
 						<th>Valor por km</th>
+						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody>
 					<% if @prices.empty? %>
 						<tr>
-							<td colspan="3">
+							<td colspan="4">
 								<p>Não existem preços cadastrados para essa transportadora.</p>
 							</td>
 						</tr>
@@ -34,9 +35,12 @@
 					    	km_price = p.km_price.to_f / 100
 					    %>
 					    <tr>
-					    	<td><%= cubic_meter_min %>cm3 a <%= cubic_meter_max %>cm3</td>
+					    	<td><%= "%g" % cubic_meter_min %>cm3 a <%= "%g" % cubic_meter_max %>cm3</td>
 					    	<td><%= "%g" % minimum_weight %>kg a <%= "%g" % maximum_weight %>kg</td>
 					    	<td>R$ <%= "%.2f" % km_price %></td>
+					    	<td>
+					    		<%= link_to 'Editar', edit_price_path( p.id ) %>
+					    	</td>
 					    </tr>
 					  <% end %>
 					<% end %>
