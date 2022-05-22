@@ -13,4 +13,8 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   get '/orders_all/', to: 'orders#all', as: 'orders_all'
   get '/orders_one/:id', to: 'orders#getOne', as: 'order_get'
+  get '/orders_accept/:id', to: 'orders#accept', as: 'order_accept'
+
+  put '/orders_accept/:id', to: 'orders#accept_update'
+  patch '/orders_accept/:id', to: 'orders#accept_update'
 end

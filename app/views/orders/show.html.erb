@@ -58,7 +58,16 @@
 
 					<dt>Status:</dt>
 					<dd><%= @order.status %></dd>
+
+					<% if @order.status != 'pendente' and @order.status == 'aceita' %>
+					  <dt>Veículo:</dt>
+					  <dd><%= @order.vehicle.mockup %></dd>
+					<% end %>
 				</dl>
+
+				<p>
+					<%= link_to 'Aceitar ordem de serviço', order_accept_path( id: @order.id, carrier_id: @order.carrier.id ) %>
+				</p>
 			</div>
 		</div>
 	</div>

@@ -73,5 +73,25 @@ class OrdersController < ApplicationController
     redirect_to orders_all_path
   end
 
+  def accept
+  	@vehicles = Vehicle.where( params[:carrier_id] )
+  	@order = Order.find( params[:id] )
+  end
+
+  def accept_update
+  	@carriers = Carrier.all
+		@carrier = Carrier.find(params[:order][:carrier_id])
+		# strong parameters
+		order_params = params.require(:order).permit(:status, :vehicle_id, :carrier_id)		
+		@order = Order.find(params[:id])		
+		if @order.carrier.id == Vehicle.find( params[:order][:vehicle_id] ).carrier_id && @order.update( order_params )
+		# if @order.update(order_params)
+			flash[:notice] = 'Ordem de serviço aceita com sucesso.'
+			redirect_to order_path( @order.id )
+		else
+			flash.now[:notice] = 'Não foi possível aceitar essa ordem de serviço.'
+			render 'edit'
+		end
+  end
 
 end

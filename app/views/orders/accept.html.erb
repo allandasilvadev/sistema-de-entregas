@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Transportadora: <%= @order.carrier.brand_name %></h1>
+			<h3>Ordem de serviço: <%= @order.code %></h3>
+
+			<p>
+				<%= link_to 'Voltar', order_path( id: @order.id, carrier_id: @order.carrier.id  ) %>
+			</p>
+
+			<%= form_with(model: @order, url: order_accept_path ) do |f| %>
+			  <div>
+  				<%= f.label :vehicle_id, 'Veículo a ser usado' %><br>
+  				<%= f.collection_select :vehicle_id, @vehicles, :id, :mockup, :prompt => 'Selecione um veículo' %>
+  			</div>
+  			<%= f.hidden_field :status, value: 'aceita' %>
+  			<%= f.hidden_field :carrier_id, value: @order.carrier.id %>
+			  <div>
+			  	<%= f.submit 'Enviar', class: 'btn btn-success' %>
+			  </div>
+			<% end %>
+		</div>
+	</div>
+</div>
