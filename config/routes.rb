@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :terms, only: [:index, :new, :create, :edit, :update, :destroy]
 
   resources :orders, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  get '/orders_all/', to: 'orders#all', as: 'orders_all'
 end

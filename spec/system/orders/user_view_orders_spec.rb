@@ -1,6 +1,139 @@
 require 'rails_helper'
 
 describe 'Usuário vê ordens de serviço' do
+	# para administradores
+	it 'ADM: a partir da página para administradores' do
+		# Arrage
+
+		# Act
+		visit root_path
+		within('nav') do
+			click_on 'Visualizar ordens de serviço'
+		end
+
+		# Assert
+		expect(current_path).to eq orders_all_path
+	end
+
+	# adiministradores poderao ver ordens de serviço de todas as transportadoras
+	it 'ADM: com sucesso' do
+		# Arrange
+		acme = Carrier.create!(
+			corporate_name: 'ACME LTDA',
+			brand_name: 'ACME',
+			registration_number: '12242556123245',
+			full_address: 'Av. das Nações, 1000',
+			city: 'Bauru',
+			state: 'SP',
+			email_domain: 'acme.com.br',
+			activated: true
+		)
+
+		star = Carrier.create!(
+			corporate_name: 'Star LTDA',
+			brand_name: 'Star',
+			registration_number: '12242556123254',
+			full_address: 'Av. das Palmas, 8000',
+			city: 'Salvador',
+			state: 'BA',
+			email_domain: 'star.com',
+			activated: true
+		)
+
+		Order.create!(
+			collection_address: 'Av. das Nações, 1000',
+			sku_product: 'SAMSU-12345',
+			height: '60',
+			width: '60',
+			depth: '10',
+			weight: '8000',
+			distance: '20_000',
+			location: 'Av. das Nações, 1000',
+			delivery_address: 'Rua das Flores, 26 - Bauru - SP',
+			recipient_name: 'Maria',
+			recipient_cpf: '12344567890',
+			status: 'pendente',
+			code: 'ORDER1234567891',
+			carrier: acme
+		)
+
+		Order.create!(
+			collection_address: 'Av. das Nações, 1000',
+			sku_product: 'SAMSU-12345',
+			height: '60',
+			width: '60',
+			depth: '10',
+			weight: '8000',
+			distance: '40_000',
+			location: 'Av. das Nações, 1000',
+			delivery_address: 'Rua das Palmas, 48 - Salvador - BA',
+			recipient_name: 'Paulo',
+			recipient_cpf: '12344567884',
+			status: 'pendente',
+			code: 'ORDER1234567819',
+			carrier: star
+		)
+
+		# Act
+		visit root_path
+		within('nav') do
+			click_on 'Visualizar ordens de serviço'
+		end
+
+		# Assert
+		expect(current_path).to eq orders_all_path
+
+		expect(page).to have_content 'Ordens de serviço'
+
+		expect(page).to have_content 'Código: ORDER1234567819'
+		expect(page).to have_content 'Endereço de coleta: Av. das Nações, 1000'
+		expect(page).to have_content 'Volume: 0.036m3'
+		expect(page).to have_content 'Peso: 8kg'
+		expect(page).to have_content 'Distância: 40km'
+		expect(page).to have_content 'Localização: Av. das Nações, 1000'
+		expect(page).to have_content 'Endereço de entrega: Rua das Palmas, 48 - Salvador - BA'
+		expect(page).to have_content 'Status: pendente'
+
+		expect(page).to have_content 'Código: ORDER1234567891'
+		expect(page).to have_content 'Endereço de coleta: Av. das Nações, 1000'
+		expect(page).to have_content 'Volume: 0.036m3'
+		expect(page).to have_content 'Peso: 8kg'
+		expect(page).to have_content 'Distância: 20km'
+		expect(page).to have_content 'Localização: Av. das Nações, 1000'
+		expect(page).to have_content 'Endereço de entrega: Rua das Flores, 26 - Bauru - SP'
+		expect(page).to have_content 'Status: pendente'
+	end
+
+	it 'ADM: e não existem ordens de serviço cadastradas.' do
+		# Arrange
+		acme = Carrier.create!(
+			corporate_name: 'ACME LTDA',
+			brand_name: 'ACME',
+			registration_number: '12242556123245',
+			full_address: 'Av. das Nações, 1000',
+			city: 'Bauru',
+			state: 'SP',
+			email_domain: 'acme.com.br',
+			activated: true
+		)
+
+		# Act
+		visit root_path
+		within('nav') do
+			click_on 'Visualizar ordens de serviço'
+		end
+
+		# Assert
+		expect(current_path).to eq orders_all_path
+		expect(page).to have_content 'Ordens de serviço'
+		expect(page).to have_content 'Não existem ordens de serviço cadastradas.'
+	end
+
+	it 'ADM: e volta para tela onde todas as ordens de serviço são listadas' do
+	end
+
+
+
 	it 'a partir da página de detalhes de uma transportadora' do
 		# Arrange
 		acme = Carrier.create!(

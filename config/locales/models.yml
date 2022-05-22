@@ -5,6 +5,7 @@ pt-BR:
       vehicle: 'Veículo'
       price: 'Preço'
       term: 'Prazo'
+      order: 'Ordem de serviço'
     attributes:
       carrier:
         corporate_name: 'Razão social'
@@ -32,3 +33,17 @@ pt-BR:
         minimum_distance: 'Distância miníma em metros'
         maximum_distance: 'Distância máxima em metros'
         days: 'Dias úteis'
+      order:
+        collection_address: 'Endereço de coleta'
+        sku_product: 'Código do produto'
+        height: 'Altura em centímetros'
+        width: 'Largura em centímetros'
+        depth: 'Profundidade em centímetros'
+        weight: 'Peso em gramas'
+        delivery_address: 'Endereço de entrega'
+        recipient_name: 'Nome do destinatário'
+        recipient_cpf: 'Cpf do destinatário'
+        status: 'Status'
+        code: 'Código da ordem de serviço'
+        distance: 'Distância em metros'
+        location: 'Localização'

@@ -1,0 +1,49 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Ordens de serviço</h1>
+
+			<% if @orders.empty? %>
+			  <div class="order-container">
+			  	<p>Não existem ordens de serviço cadastradas.</p>
+			  </div>
+			<% else %>
+			  <% @orders.each do |order| %>
+			    <%
+			    	volume = order.height.to_f * order.width.to_f * order.depth.to_f
+			    	volume = volume / 1000000
+
+			    	peso = order.weight.to_f / 1000
+
+			    	distance = order.distance.to_f / 1000
+			    %>
+			    <div class="order-container">
+			    	<h3>Código: <%= link_to order.code, order_path( order.id ) %></h3>
+			    	<dl>
+			    		<dt>Endereço de coleta:</dt>
+			    		<dd><%= order.collection_address %></dd>
+
+			    		<dt>Volume:</dt>
+			    		<dd><%= "%g" % volume %>m3</dd>
+
+			    		<dt>Peso:</dt>
+			    		<dd><%= "%g" % peso %>kg</dd>
+
+			    		<dt>Distância:</dt>
+			    		<dd><%= "%g" % distance %>km</dd>
+
+			    		<dt>Localização:</dt>
+			    		<dd><%= order.location %></dd>
+
+			    		<dt>Endereço de entrega:</dt>
+			    		<dd><%= order.delivery_address %></dd>
+
+			    		<dt>Status:</dt>
+			    		<dd><%= order.status %></dd>
+			    	</dl>
+			    </div>
+			  <% end %>
+			<% end %>
+		</div>
+	</div>
+</div>
