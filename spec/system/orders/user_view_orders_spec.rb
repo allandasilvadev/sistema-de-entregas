@@ -93,6 +93,7 @@ describe 'Usuário vê ordens de serviço' do
 		expect(page).to have_content 'Localização: Av. das Nações, 1000'
 		expect(page).to have_content 'Endereço de entrega: Rua das Palmas, 48 - Salvador - BA'
 		expect(page).to have_content 'Status: pendente'
+		expect(page).to have_content 'Transportadora: Star'
 
 		expect(page).to have_content 'Código: ORDER1234567891'
 		expect(page).to have_content 'Endereço de coleta: Av. das Nações, 1000'
@@ -102,6 +103,7 @@ describe 'Usuário vê ordens de serviço' do
 		expect(page).to have_content 'Localização: Av. das Nações, 1000'
 		expect(page).to have_content 'Endereço de entrega: Rua das Flores, 26 - Bauru - SP'
 		expect(page).to have_content 'Status: pendente'
+		expect(page).to have_content 'Transportadora: ACME'
 	end
 
 	it 'ADM: e não existem ordens de serviço cadastradas.' do

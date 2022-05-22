@@ -40,10 +40,17 @@
 
 			    		<dt>Status:</dt>
 			    		<dd><%= order.status %></dd>
+
+			    		<dt>Transportadora:</dt>
+			    		<dd><%= order.carrier.brand_name %></dd>
 			    	</dl>
 
 			    	<p id="orderid-<%= order.id %>">
 			    		<%= link_to 'Editar', edit_order_path( order.id ) %>
+			    	</p>
+
+			    	<p id="del-<%= order.id %>">
+			    		<%= link_to 'Remover', order_path( order.id ), method: :delete %>
 			    	</p>
 			    </div>
 			  <% end %>

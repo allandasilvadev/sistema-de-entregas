@@ -144,6 +144,51 @@ describe 'Usuário edita ordens de serviço' do
 		expect(page).to have_content 'Status: pendente'
 	end
 
+	it 'e a ordem de serviço já foi aceita pela transportadora' do
+		# Arrange
+		acme = Carrier.create!(
+			corporate_name: 'ACME LTDA',
+			brand_name: 'ACME',
+			registration_number: '12242556123245',
+			full_address: 'Av. das Nações, 1000',
+			city: 'Bauru',
+			state: 'SP',
+			email_domain: 'acme.com.br',
+			activated: true
+		)
+
+		order = Order.create!(
+			collection_address: 'Av. das Nações, 1000',
+			sku_product: 'SAMSU-12345',
+			height: '60',
+			width: '60',
+			depth: '10',
+			weight: '8000',
+			distance: '20_000',
+			location: 'Av. das Nações, 1000',
+			delivery_address: 'Rua das Flores, 26 - Bauru - SP',
+			recipient_name: 'Maria',
+			recipient_cpf: '12344567890',
+			status: 'aceita',
+			code: 'ORDER1234567891',
+			carrier: acme
+		)
+
+		# Act
+		visit root_path
+		within('nav') do
+			click_on 'Visualizar ordens de serviço'
+		end
+		within("#orderid-#{order.id}") do
+			click_on 'Editar'
+		end
+
+		# Assert
+		expect(current_path).to eq order_get_path( order.id )
+		expect(page).to have_content 'Ordens de serviço'
+		expect(page).to have_content 'Ordens aceitas pelas transportadoras não podem ser editadas.'
+	end
+
 	it 'e mantém os campos obrigatórios' do
 		# Arrange
 		acme = Carrier.create!(

@@ -42,6 +42,7 @@ class OrdersController < ApplicationController
 
 		if @order.status != 'pendente'
 			flash[:notice] = 'Ordens aceitas pelas transportadoras não podem ser editadas.'
+			redirect_to order_get_path( @order.id )
 		end
 	end
 
@@ -63,6 +64,14 @@ class OrdersController < ApplicationController
 	def getOne
 		@order = Order.find( params[:id] )
 	end
+
+	def destroy
+		@order = Order.find(params[:id])
+    @order.destroy    
+    @orders = Order.all
+    flash[:notice] = 'Ordem de serviço excluída com sucesso.'  
+    redirect_to orders_all_path
+  end
 
 
 end
