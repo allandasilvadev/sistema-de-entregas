@@ -35,5 +35,34 @@ class OrdersController < ApplicationController
 		end
 	end
 
+	def edit
+		@carriers = Carrier.all
+		@order = Order.find( params[:id] )
+
+
+		if @order.status != 'pendente'
+			flash[:notice] = 'Ordens aceitas pelas transportadoras não podem ser editadas.'
+		end
+	end
+
+	def update
+		@carriers = Carrier.all
+		@carrier = Carrier.find(params[:order][:carrier_id])
+		# strong parameters
+		order_params = params.require(:order).permit(:distance, :delivery_address, :recipient_name, :recipient_cpf, :carrier_id)		
+		@order = Order.find(params[:id])
+		if @order.update(order_params)
+			flash[:notice] = 'Ordem de serviço atualizada com sucesso.'
+			redirect_to order_get_path( @order.id )
+		else
+			flash.now[:notice] = 'Não foi possivel atualizar a ordem de serviço.'
+			render 'edit'
+		end
+	end
+
+	def getOne
+		@order = Order.find( params[:id] )
+	end
+
 
 end

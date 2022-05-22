@@ -18,7 +18,7 @@
 			    	distance = order.distance.to_f / 1000
 			    %>
 			    <div class="order-container">
-			    	<h3>Código: <%= link_to order.code, order_path( order.id ) %></h3>
+			    	<h3>Código: <%= link_to order.code, order_get_path( order.id ) %></h3>
 			    	<dl>
 			    		<dt>Endereço de coleta:</dt>
 			    		<dd><%= order.collection_address %></dd>
@@ -41,6 +41,10 @@
 			    		<dt>Status:</dt>
 			    		<dd><%= order.status %></dd>
 			    	</dl>
+
+			    	<p id="orderid-<%= order.id %>">
+			    		<%= link_to 'Editar', edit_order_path( order.id ) %>
+			    	</p>
 			    </div>
 			  <% end %>
 			<% end %>

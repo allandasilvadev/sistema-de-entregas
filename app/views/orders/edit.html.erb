@@ -1,0 +1,51 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Editar ordem de serviço: <%= @order.code %></h1>
+
+			<p>
+				<%= link_to 'Voltar', order_get_path( @order.id ) %>
+			</p>
+
+			<% if @order.errors.any? %>
+				<p>Verifique os erros abaixo.</p>
+				<ul>
+					<% @order.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+					<% end %>
+				</ul>
+			<% end %>
+
+			<%= form_with(model: @order) do |f| %>
+			  <div class="form-group">
+			  	<%= f.label :delivery_address %><br>
+			  	<%= f.text_field :delivery_address, class: 'form-control' %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :recipient_name %><br>
+			  	<%= f.text_field :recipient_name, class: 'form-control' %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :recipient_cpf %><br>
+			  	<%= f.text_field :recipient_cpf, class: 'form-control' %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :distance %><br>
+			  	<%= f.text_field :distance, class: 'form-control' %>
+			  </div>
+
+			  <div>
+  				<%= f.label :carrier_id, 'Transportadora' %>
+  				<%= f.collection_select :carrier_id, @carriers, :id, :brand_name %>
+  			</div>
+
+			  <div>
+			  	<%= f.submit 'Enviar', class: 'btn btn-sucess' %>
+			  </div>
+			<% end %>
+		</div>
+	</div>
+</div>

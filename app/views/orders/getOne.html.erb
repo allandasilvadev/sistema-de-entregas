@@ -1,0 +1,64 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Ordens de serviço</h1>
+			
+			<p>
+				<%= link_to 'Voltar', orders_all_path %>
+			</p>
+
+			<div class="order-section">
+				<%
+					volume = @order.height.to_f * @order.width.to_f * @order.depth.to_f
+			    volume = volume / 1000000
+
+			    peso = @order.weight.to_f / 1000
+
+			    distance = @order.distance.to_f / 1000
+				%>
+				<h2>Código: <%= @order.code %></h2>
+
+				<dl>
+					<dt>Endereço de coleta:</dt>
+					<dd><%= @order.collection_address %></dd>
+
+					<dt>Código do produto:</dt>
+					<dd><%= @order.sku_product %></dd>
+
+					<dt>Altura:</dt>
+					<dd><%= @order.height %>cm</dd>
+
+					<dt>Largura:</dt>
+					<dd><%= @order.width %>cm</dd>
+
+					<dt>Profundidade:</dt>
+					<dd><%= @order.depth %>cm</dd>
+
+					<dt>Volume:</dt>
+					<dd><%= volume %>m3</dd>
+
+					<dt>Peso:</dt>
+					<dd><%= "%g" % peso %>kg</dd>
+
+					<dt>Distância:</dt>
+					<dd><%= "%g" % distance %>km</dd>
+
+					<dt>Localização:</dt>
+					<dd><%= @order.location %></dd>
+
+					<dt>Endereço de entrega:</dt>
+					<dd><%= @order.delivery_address %></dd>
+
+					<dt>Nome do destinatário:</dt>
+					<dd><%= @order.recipient_name %></dd>
+
+					<dt>Cpf do destinatário:</dt>
+					<dd><%= @order.recipient_cpf %></dd>
+
+					<dt>Status:</dt>
+					<dd><%= @order.status %></dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>
