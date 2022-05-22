@@ -46,6 +46,8 @@ describe 'Usuário vê ordens de serviço' do
 			width: '60',
 			depth: '10',
 			weight: '8000',
+			distance: '20_000',
+			location: 'Av. das Nações, 1000',
 			delivery_address: 'Rua das Flores, 26 - Bauru - SP',
 			recipient_name: 'Maria',
 			recipient_cpf: '12344567890',
@@ -61,6 +63,8 @@ describe 'Usuário vê ordens de serviço' do
 			width: '60',
 			depth: '10',
 			weight: '8000',
+			distance: '40_000',
+			location: 'Av. das Nações, 1000',
 			delivery_address: 'Rua das Palmas, 48 - Salvador - BA',
 			recipient_name: 'Paulo',
 			recipient_cpf: '12344567884',
@@ -86,6 +90,8 @@ describe 'Usuário vê ordens de serviço' do
 		expect(page).to have_content 'Endereço de coleta: Av. das Nações, 1000'
 		expect(page).to have_content 'Volume: 0.036m3'
 		expect(page).to have_content 'Peso: 8kg'
+		expect(page).to have_content 'Distância: 20km'
+		expect(page).to have_content 'Localização: Av. das Nações, 1000'
 		expect(page).to have_content 'Endereço de entrega: Rua das Flores, 26 - Bauru - SP'
 		expect(page).to have_content 'Status: pendente'
 
@@ -93,6 +99,8 @@ describe 'Usuário vê ordens de serviço' do
 		expect(page).to have_content 'Endereço de coleta: Av. das Nações, 1000'
 		expect(page).to have_content 'Volume: 0.036m3'
 		expect(page).to have_content 'Peso: 8kg'
+		expect(page).to have_content 'Distância: 40km'
+		expect(page).to have_content 'Localização: Av. das Nações, 1000'
 		expect(page).to have_content 'Endereço de entrega: Rua das Palmas, 48 - Salvador - BA'
 		expect(page).to have_content 'Status: pendente'
 	end
@@ -128,6 +136,8 @@ describe 'Usuário vê ordens de serviço' do
 			width: '60',
 			depth: '10',
 			weight: '8000',
+			distance: '20_000',
+			location: 'Av. das Nações, 1000',
 			delivery_address: 'Rua das Flores, 26 - Bauru - SP',
 			recipient_name: 'Maria',
 			recipient_cpf: '12344567890',
@@ -143,6 +153,8 @@ describe 'Usuário vê ordens de serviço' do
 			width: '60',
 			depth: '10',
 			weight: '8000',
+			distance: '40_000',
+			location: 'Av. das Nações, 1000',
 			delivery_address: 'Rua das Palmas, 48 - Salvador - BA',
 			recipient_name: 'Paulo',
 			recipient_cpf: '12344567884',
@@ -168,6 +180,8 @@ describe 'Usuário vê ordens de serviço' do
 		expect(page).to have_content 'Endereço de coleta: Av. das Nações, 1000'
 		expect(page).to have_content 'Volume: 0.036m3'
 		expect(page).to have_content 'Peso: 8kg'
+		expect(page).to have_content 'Distância: 40km'
+		expect(page).to have_content 'Localização: Av. das Nações, 1000'
 		expect(page).to have_content 'Endereço de entrega: Rua das Palmas, 48 - Salvador - BA'
 		expect(page).to have_content 'Status: pendente'
 

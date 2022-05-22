@@ -19,9 +19,11 @@
 			    	volume = volume / 1000000
 
 			    	peso = order.weight.to_f / 1000
+
+			    	distance = order.distance.to_f / 1000
 			    %>
 			    <div class="order-container">
-			    	<h3>Código: <%= order.code %></h3>
+			    	<h3>Código: <%= link_to order.code, order_path( order.id ) %></h3>
 			    	<dl>
 			    		<dt>Endereço de coleta:</dt>
 			    		<dd><%= order.collection_address %></dd>
@@ -31,6 +33,12 @@
 
 			    		<dt>Peso:</dt>
 			    		<dd><%= "%g" % peso %>kg</dd>
+
+			    		<dt>Distância:</dt>
+			    		<dd><%= "%g" % distance %>km</dd>
+
+			    		<dt>Localização:</dt>
+			    		<dd><%= order.location %></dd>
 
 			    		<dt>Endereço de entrega:</dt>
 			    		<dd><%= order.delivery_address %></dd>
