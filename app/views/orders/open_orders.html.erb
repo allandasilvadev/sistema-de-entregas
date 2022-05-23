@@ -1,0 +1,58 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Consultar o status de sua entrega</h2>
+			<p>Informe no formulário abaixo o código de sua entrega.</p>
+
+			<p>
+				<%= link_to 'Voltar', root_path %>
+			</p>
+
+			<%= form_with url: "/open_orders", method: :get do |f| %>
+			  <div class="form-group">
+			  	<%= f.label :code, 'Código da entrega' %><br>
+          <%= f.text_field :code, class: 'form-control' %> 
+			  </div>
+			  <div>
+			  	<%= f.submit 'Enviar', class: 'btn btn-primary' %>
+			  </div>
+			<% end %>
+
+			<% if @dados.empty? %>
+			<% else %>
+			  <div class="order-status">
+			  	<h3>Status da sua entrega</h3>
+
+			  	<dl>
+			  		<dt>Código:</dt>
+			  		<dd><%= @dados['code'] %></dd>
+
+			  		<dt>Localização:</dt>
+			  		<dd><%= @dados['location'] %></dd>
+
+			  		<dt>Endereço de entrega:</dt>
+			  		<dd><%= @dados['delivery_address'] %></dd>
+
+			  		<dt>Nome do destinatário:</dt>
+			  		<dd><%= @dados['recipient_name'] %></dd>
+
+			  		<dt>Cpf do destinatário:</dt>
+			  		<dd><%= @dados['recipient_cpf'] %></dd>
+
+			  		<dt>Status:</dt>
+			  		<dd>
+					    <% @all_status.each do |s| %>
+					      <% if @order.status == s[0] %>
+					        <%= s[1] %>
+					      <% end %>
+					    <% end %>
+				    </dd>
+
+				    <dt>Data da última atualização:</dt>
+				    <dd><%= @dados['date_and_time'] %></dd>
+			  	</dl>
+			  </div>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -118,4 +118,29 @@ class OrdersController < ApplicationController
 		end
   end
 
+  def open_orders
+  	@all_status = { "aceita" => "aceita", "pendente" => "pendente", "in_progress" => 'Em andamento', "finished" => 'Finalizada', "canceled" => 'Cancelada' }
+  	if params[:code]
+  		@order = Order.where(code: params[:code]).first
+  		if @order.nil?
+  			@dados = []
+  			flash[:notice] = 'O código informado está incorreto.'
+  			render 'open_orders'
+  		else
+  			@dados = { 
+	  			"code" => @order.code, 
+	  			"location" => @order.location, 
+	  			"delivery_address" => @order.delivery_address,
+	  			"recipient_name" => @order.recipient_name,
+	  			"recipient_cpf" => @order.recipient_cpf,
+	  			"status" => @order.status,
+	  			"date_and_time" => @order.date_and_time 
+	  		}
+  		end  		
+  	else
+  		@dados = []
+  		render 'open_orders'
+  	end
+  end
+
 end
