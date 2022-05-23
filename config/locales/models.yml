@@ -47,3 +47,4 @@ pt-BR:
         code: 'Código da ordem de serviço'
         distance: 'Distância em metros'
         location: 'Localização'
+        date_and_time: 'Data da última atualização'

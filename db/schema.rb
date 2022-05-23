@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_22_110522) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_23_105309) do
   create_table "carriers", force: :cascade do |t|
     t.string "corporate_name"
     t.string "brand_name"
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_110522) do
     t.datetime "updated_at", null: false
     t.integer "distance"
     t.string "location"
+    t.string "date_and_time"
     t.index ["carrier_id"], name: "index_orders_on_carrier_id"
     t.index ["vehicle_id"], name: "index_orders_on_vehicle_id"
   end

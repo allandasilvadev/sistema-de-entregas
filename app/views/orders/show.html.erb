@@ -57,16 +57,34 @@
 					<dd><%= @order.recipient_cpf %></dd>
 
 					<dt>Status:</dt>
-					<dd><%= @order.status %></dd>
+					<dd>
+						<% @all_status.each do |s| %>
+						  <% if @order.status == s[0] %>
+						    <%= s[1] %>
+						  <% end %>
+						<% end %>
+					</dd>
 
 					<% if @order.status != 'pendente' and @order.status == 'aceita' %>
 					  <dt>Veículo:</dt>
 					  <dd><%= @order.vehicle.mockup %></dd>
 					<% end %>
+
+					<% if !@order.date_and_time.nil? %>
+					  <dt>Data da última atualização:</dt>
+					  <dd><%= @order.date_and_time %></dd>
+					<% else %>
+					  <dt>Data da última atualização:</dt>
+					  <dd><%= @order.created_at %></dd>
+					<% end %>
 				</dl>
 
 				<p>
 					<%= link_to 'Aceitar ordem de serviço', order_accept_path( id: @order.id, carrier_id: @order.carrier.id ) %>
+				</p>
+
+				<p>
+					<%= link_to 'Atualizar status e localização da ordem de serviço', order_update_status_path( id: @order.id, carrier_id: @order.carrier.id ) %>
 				</p>
 			</div>
 		</div>

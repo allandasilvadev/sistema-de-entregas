@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 	end
 
 	def show
+		@all_status = { "aceita" => "aceita", "pendente" => "pendente", "in_progress" => 'Em andamento', "finished" => 'Finalizada', "canceled" => 'Cancelada' }
 		@order = Order.find( params[:id] )
 	end
 
@@ -91,6 +92,29 @@ class OrdersController < ApplicationController
 		else
 			flash.now[:notice] = 'Não foi possível aceitar essa ordem de serviço.'
 			render 'edit'
+		end
+  end
+
+
+  def update_status
+  	@order = Order.find( params[:id] )
+  	@all_status = { "aceita" => "aceita", "in_progress" => 'Em andamento', "finished" => 'Finalizada', "canceled" => 'Cancelada' }
+  end
+
+  def upd_status
+  	@all_status = { "aceita" => "aceita", "pendente" => "pendente", "in_progress" => 'Em andamento', "finished" => 'Finalizada', "canceled" => 'Cancelada' }
+  	@carriers = Carrier.all
+		@carrier = Carrier.find(params[:order][:carrier_id])
+		# strong parameters
+		order_params = params.require(:order).permit(:status, :location, :date_and_time, :carrier_id)		
+		@order = Order.find(params[:id])		
+		if @order.update( order_params )
+		# if @order.update(order_params)
+			flash[:notice] = 'A localização e o status da ordem de serviço foram atualizadas com sucesso.'
+			redirect_to order_path( @order.id )
+		else
+			flash.now[:notice] = 'Não foi possível atualizar o status da ordem de serviço.'
+			render 'update_status'
 		end
   end
 

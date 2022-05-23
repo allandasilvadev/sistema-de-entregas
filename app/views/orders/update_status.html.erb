@@ -1,0 +1,70 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Transportadora: <%= @order.carrier.brand_name %></h1>
+			<h3>Ordem de serviço: <%= @order.code %></h3>
+
+			<p>
+				<%= link_to 'Voltar', order_path( id: @order.id, carrier_id: @order.carrier.id ) %>
+			</p>
+
+			<% if @order.errors.any? %>
+				<p>Verifique os erros abaixo.</p>
+				<ul>
+					<% @order.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+					<% end %>
+				</ul>
+			<% end %>
+
+			<dl>
+				<dt>Localização atual:</dt>
+				<dd><%= @order.location %></dd>
+
+				<dt>Status atual:</dt>
+				<dd>
+					<% @all_status.each do |s| %>
+					  <% if @order.status == s[0] %>
+					    <%= s[1] %>
+					  <% end %>
+					<% end %>
+				</dd>
+			</dl>
+
+			<%= form_with(model: @order, url: order_update_status_path ) do |f| %>
+			  <div class="form-group">
+			  	<%= f.label :status %><br>
+			  	<select name="order[status]" id="order_status">
+			  		<% @all_status.each do |s| %>
+			  		  <% if @order.status == s[0] %>
+			  		    <option value="<%= s[0] %>" selected="selected"><%= s[1] %></option>
+			  		  <% else %>
+			  		    <option value="<%= s[0] %>"><%= s[1] %></option>
+			  		  <% end %>			  		
+			  		<% end %>
+			  	</select>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :location %><br>
+			  	<%= f.text_field :location, class: 'form-control' %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :date_and_time %><br>
+			  	<%= f.text_field :date_and_time, class: 'form-control', value: Time.now.strftime("%d/%m/%Y %H:%M") %>
+			  </div>
+
+				<%= f.hidden_field :carrier_id, value: @order.carrier.id %>
+
+			  <div>
+			  	<%= f.submit 'Enviar', class: 'btn btn-success' %>
+			  </div>
+			<% end %>
+
+			<p>
+				<%= link_to 'Mais informações', order_path( id: @order.id, carrier_id: @order.carrier.id ) %>
+			</p>
+		</div>
+	</div>
+</div>

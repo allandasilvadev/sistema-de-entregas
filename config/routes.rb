@@ -17,4 +17,8 @@ Rails.application.routes.draw do
 
   put '/orders_accept/:id', to: 'orders#accept_update'
   patch '/orders_accept/:id', to: 'orders#accept_update'
+
+  get '/orders_update_status/:id', to: 'orders#update_status', as: 'order_update_status'
+  put   '/orders_update_status/:id', to: 'orders#upd_status'
+  patch '/orders_update_status/:id', to: 'orders#upd_status'
 end
