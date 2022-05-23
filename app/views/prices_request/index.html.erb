@@ -1,0 +1,72 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Consultar preços</h1>
+
+			<p>
+				<%= link_to 'Voltar', root_path %>
+			</p>
+
+			<%= form_with url: "/prices_request", method: :get do |f| %>
+			  <div class="form-group">
+			  	<%= f.label :height, 'Altura em centímetros' %><br>
+			  	<%= f.text_field :height, class: 'form-control' %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :width, 'Largura em centímetros' %><br>
+			  	<%= f.text_field :width, class: 'form-control' %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :depth, 'Profundidade em centímetros' %><br>
+			  	<%= f.text_field :depth, class: 'form-control' %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :weight, 'Peso em gramas' %><br>
+			  	<%= f.text_field :weight, class: 'form-control' %>
+			  </div>
+
+			  <div class="form-group">
+			  	<%= f.label :distance, 'Distância em metros' %><br>
+			  	<%= f.text_field :distance, class: 'form-control' %>
+			  </div>
+
+			  <%= f.hidden_field :search, value: true %>
+
+			  <div>
+			  	<%= f.submit 'Enviar', class: 'btn btn-success' %>
+			  </div>
+			<% end %>
+
+			<div class="prices-section">
+				<% if @dados.empty? %>
+				<% else %>
+					<% @dados.each do |price| %>
+					<%
+						cubic_meter_min = price.cubic_meter_min.to_f / 100
+					  cubic_meter_max = price.cubic_meter_max.to_f / 100
+					  minimum_weight = price.minimum_weight.to_f / 1000 
+					  maximum_weight = price.maximum_weight.to_f / 1000					    	
+					  km_price = price.km_price.to_f / 100
+					%>
+					<dl>
+						<dt>Transportadora:</dt>
+						<dd><%= price.carrier.brand_name %></dd>
+
+						<dt>Volume:</dt>
+						<dd><%= "%g" % cubic_meter_min %>cm3 a <%= "%g" % cubic_meter_max %>cm3</dd>
+
+						<dt>Peso:</dt>
+						<dd><%= "%g" % minimum_weight %>kg a <%= "%g" % maximum_weight %>kg</dd>
+
+						<dt>Preço:</dt>
+						<dd>R$ <%= "%.2f" % km_price %></dd>
+					</dl>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

@@ -23,4 +23,6 @@ Rails.application.routes.draw do
   patch '/orders_update_status/:id', to: 'orders#upd_status'
 
   get '/open_orders', to: 'orders#open_orders', as: 'open_orders'
+
+  resources :prices_request, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 end
