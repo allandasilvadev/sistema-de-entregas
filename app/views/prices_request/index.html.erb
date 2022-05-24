@@ -63,6 +63,9 @@
 
 						<dt>Preço:</dt>
 						<dd>R$ <%= "%.2f" % km_price %></dd>
+
+						<dt>Preço da entrega:</dt>
+						<dd>R$ <%= "%.2f" % (km_price * @distance) %></dd>
 					</dl>
 					<% end %>
 				<% end %>

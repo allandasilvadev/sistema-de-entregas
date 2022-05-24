@@ -82,7 +82,7 @@ describe 'Usuário faz uma consulta de preços' do
 			cubic_meter_max: 50, # cm3
 			minimum_weight: 0,   # g
 			maximum_weight: 10_000, # g
-			km_price: 50, # centavos
+			km_price: 75, # centavos
 			carrier: wayne,
 			minimum_distance: 10_000,
 			maximum_distance: 60_000
@@ -105,11 +105,13 @@ describe 'Usuário faz uma consulta de preços' do
 		expect(page).to have_content 'Volume: 0.01cm3 a 0.5cm3'
 		expect(page).to have_content 'Peso: 0kg a 10kg'
 		expect(page).to have_content 'Preço: R$ 0.50'
+		expect(page).to have_content 'Preço da entrega: R$ 5.00'
 
 		expect(page).to have_content 'Transportadora: Wayne'
 		expect(page).to have_content 'Volume: 0.01cm3 a 0.5cm3'
 		expect(page).to have_content 'Peso: 0kg a 10kg'
 		expect(page).to have_content 'Preço: R$ 0.50'
+		expect(page).to have_content 'Preço da entrega: R$ 7.50'
 	end
 
 	it 'e não preenche todos os campos' do
@@ -174,7 +176,7 @@ describe 'Usuário faz uma consulta de preços' do
 			cubic_meter_max: 50, # cm3
 			minimum_weight: 0,   # g
 			maximum_weight: 10_000, # g
-			km_price: 50, # centavos
+			km_price: 75, # centavos
 			carrier: wayne,
 			minimum_distance: 10_000,
 			maximum_distance: 60_000
