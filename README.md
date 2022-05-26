@@ -14,3 +14,7 @@ Esse sistema de entregas permite que um fornecedor gerencie transportadoras que 
 - Entrar na pasta do projeto, usando o comando "cd"
 - Executar o comando '$rails server'
 - Acessar "http://localhost:3000"
+
+#### Para acessar a área administrativa, usar as credenciais:
+- E-mail: treinadev@email.com
+- Senha: 123456
