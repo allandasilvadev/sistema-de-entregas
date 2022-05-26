@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário se autentica' do
 	it 'com sucesso' do
 		# Arrange
-		User.create!(email: 'joao@email.com', password: '123456')
+		User.create!(name: 'João da Silva', email: 'joao@email.com', password: '123456')
 
 		# Act
 		visit root_path
@@ -27,7 +27,7 @@ describe 'Usuário se autentica' do
 
 	it 'e faz logout' do
 		# Arrange
-		User.create!(email: 'joao@email.com', password: '123456')
+		User.create!(name: 'João da Silva', email: 'joao@email.com', password: '123456')
 
 		# Act
 		visit root_path

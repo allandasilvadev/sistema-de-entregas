@@ -3,8 +3,15 @@ require 'rails_helper'
 describe 'Usuário cadastra uma nova ordem de serviço' do
 	it 'a partir da página inicial' do
 		# Arrange
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
 
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Cadastrar nova ordem de serviço'
@@ -49,7 +56,15 @@ describe 'Usuário cadastra uma nova ordem de serviço' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Cadastrar nova ordem de serviço'
@@ -100,7 +115,15 @@ describe 'Usuário cadastra uma nova ordem de serviço' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Cadastrar nova ordem de serviço'
@@ -149,7 +172,15 @@ describe 'Usuário cadastra uma nova ordem de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Cadastrar nova ordem de serviço'
@@ -191,7 +222,15 @@ describe 'Usuário cadastra uma nova ordem de serviço' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Cadastrar nova ordem de serviço'

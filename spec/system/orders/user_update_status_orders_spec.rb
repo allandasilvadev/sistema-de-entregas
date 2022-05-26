@@ -42,8 +42,16 @@ describe 'Usuário da transportadora atualiza status da ordem de serviço' do
 			vehicle: ford
 		)
 
+		user = User.create!(
+			name: 'João',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
-		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -107,7 +115,16 @@ describe 'Usuário da transportadora atualiza status da ordem de serviço' do
 			vehicle: ford
 		)
 
+		user = User.create!(
+			name: 'João',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -173,7 +190,16 @@ describe 'Usuário da transportadora atualiza status da ordem de serviço' do
 			vehicle: ford
 		)
 
+		user = User.create!(
+			name: 'João',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -222,6 +248,16 @@ describe 'Usuário da transportadora atualiza status da ordem de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'João',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
+		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'

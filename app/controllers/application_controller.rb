@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 	protected
 
 	def configure_permitted_parameters
-		devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+		@carriers = Carrier.all
+		devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :role, :carrier_id])
 	end
 end

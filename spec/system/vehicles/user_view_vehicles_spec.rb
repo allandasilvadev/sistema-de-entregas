@@ -3,7 +3,27 @@ require 'rails_helper'
 describe 'Usuário vê veículos' do
 	it 'a partir do menu' do
 		# Arrange
+		acme = Carrier.create!(
+			corporate_name: 'ACME LTDA',
+			brand_name: 'ACME',
+			registration_number: '12242556123245',
+			full_address: 'Av. das Nações, 1000',
+			city: 'Bauru',
+			state: 'SP',
+			email_domain: 'acme.com.br',
+			activated: true
+		)
+
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Veículos'
@@ -46,7 +66,16 @@ describe 'Usuário vê veículos' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -109,7 +138,16 @@ describe 'Usuário vê veículos' do
 			carrier: star
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -140,7 +178,16 @@ describe 'Usuário vê veículos' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -155,7 +202,27 @@ describe 'Usuário vê veículos' do
 
 	it 'e volta para tela inicial' do
 		# Arrage
+		acme = Carrier.create!(
+			corporate_name: 'ACME LTDA',
+			brand_name: 'ACME',
+			registration_number: '12242556123245',
+			full_address: 'Av. das Nações, 1000',
+			city: 'Bauru',
+			state: 'SP',
+			email_domain: 'acme.com.br',
+			activated: true
+		)
+
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit vehicles_path
 		click_on 'Voltar'
 

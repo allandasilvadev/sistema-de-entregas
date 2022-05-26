@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário cadastra um novo veículo para uma transportadora' do
 	it 'a partir da tela de detalhes de uma transportadora' do
 		# Arrange
-		Carrier.create!(
+		acme = Carrier.create!(
 			corporate_name: 'ACME LTDA',
 			brand_name: 'ACME',
 			registration_number: '12242556123245',
@@ -14,7 +14,16 @@ describe 'Usuário cadastra um novo veículo para uma transportadora' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -44,7 +53,16 @@ describe 'Usuário cadastra um novo veículo para uma transportadora' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -81,8 +99,16 @@ describe 'Usuário cadastra um novo veículo para uma transportadora' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
-			# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -116,7 +142,16 @@ describe 'Usuário cadastra um novo veículo para uma transportadora' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'

@@ -31,7 +31,15 @@ describe 'Usuário vê detalhes de uma ordem de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'João',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'
@@ -56,6 +64,85 @@ describe 'Usuário vê detalhes de uma ordem de serviço' do
 		expect(page).to have_content 'Nome do destinatário: Maria'
 		expect(page).to have_content 'Cpf do destinatário: 12344567890'
 		expect(page).to have_content 'Status: pendente'
+	end
+
+	it 'USER: e não vê informações adicionais de ordens de serviço de outras transportadoras' do
+		# Arrange
+		acme = Carrier.create!(
+			corporate_name: 'ACME LTDA',
+			brand_name: 'ACME',
+			registration_number: '12242556123245',
+			full_address: 'Av. das Nações, 1000',
+			city: 'Bauru',
+			state: 'SP',
+			email_domain: 'acme.com.br',
+			activated: true
+		)		
+
+		order = Order.create!(
+			collection_address: 'Av. das Nações, 1000',
+			sku_product: 'SAMSU-12345',
+			height: '60',
+			width: '60',
+			depth: '10',
+			weight: '8000',
+			distance: '20_000',
+			location: 'Av. das Nações, 1000',
+			delivery_address: 'Rua das Flores, 26 - Bauru - SP',
+			recipient_name: 'Maria',
+			recipient_cpf: '12344567890',
+			status: 'pendente',
+			code: 'ORDER1234567891',
+			carrier: acme
+		)
+
+		star = Carrier.create!(
+			corporate_name: 'Star LTDA',
+			brand_name: 'Star',
+			registration_number: '12242556123211',
+			full_address: 'Av. das Palmas, 4000',
+			city: 'Salvador',
+			state: 'BA',
+			email_domain: 'star.com',
+			activated: true
+		)
+
+		order_star = Order.create!(
+			collection_address: 'Av. das Nações, 1000',
+			sku_product: 'SAMSU-12345',
+			height: '60',
+			width: '60',
+			depth: '10',
+			weight: '8000',
+			distance: '20_000',
+			location: 'Av. das Nações, 1000',
+			delivery_address: 'Rua das Flores, 26 - Bauru - SP',
+			recipient_name: 'Maria',
+			recipient_cpf: '12344567890',
+			status: 'pendente',
+			code: 'ORDER1234567822',
+			carrier: star
+		)
+
+		user = User.create!(
+			name: 'João',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
+		# Act
+		login_as(user)
+		visit root_path
+		within('nav') do
+			click_on 'Visualizar ordens de serviço'
+		end
+		# click_on 'ORDER1234567891'
+		visit order_get_path( order_star.id )
+
+		# Assert
+		expect(current_path).to eq orders_path
 	end
 
 	it 'ADM: e volta para tela onde TODAS as ordens de serviço são listadas' do
@@ -88,7 +175,15 @@ describe 'Usuário vê detalhes de uma ordem de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'João',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'
@@ -130,7 +225,16 @@ describe 'Usuário vê detalhes de uma ordem de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'João',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -190,7 +294,16 @@ describe 'Usuário vê detalhes de uma ordem de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'João',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'

@@ -4,8 +4,26 @@ describe 'Usuário vê ordens de serviço' do
 	# para administradores
 	it 'ADM: a partir da página para administradores' do
 		# Arrage
+		Carrier.create!(
+			corporate_name: 'ACME LTDA',
+			brand_name: 'ACME',
+			registration_number: '12242556123254',
+			full_address: 'Av. das Nações, 1000',
+			city: 'São Paulo',
+			state: 'SP',
+			email_domain: 'acme.com.br',
+			activated: true
+		)
+
+		user = User.create!(
+			name: 'João da Silva',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
 
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'
@@ -13,6 +31,39 @@ describe 'Usuário vê ordens de serviço' do
 
 		# Assert
 		expect(current_path).to eq orders_all_path
+	end
+
+	it 'ADM: a partir da página para administradores, mas não é um administrador' do
+		# Arrage
+		acme = Carrier.create!(
+			corporate_name: 'ACME LTDA',
+			brand_name: 'ACME',
+			registration_number: '12242556123254',
+			full_address: 'Av. das Nações, 1000',
+			city: 'São Paulo',
+			state: 'SP',
+			email_domain: 'acme.com.br',
+			activated: true
+		)
+
+		user = User.create!(
+			name: 'João da Silva',
+			email: 'joao@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
+		# Act
+		login_as(user)
+		visit root_path
+		within('nav') do
+			click_on 'Visualizar ordens de serviço'
+		end
+
+		# Assert
+		expect(current_path).to eq orders_path
+		expect(page).to have_content 'Você não pode visualizar ordens de serviço de outras transportadoras.'
 	end
 
 	# adiministradores poderao ver ordens de serviço de todas as transportadoras
@@ -74,7 +125,15 @@ describe 'Usuário vê ordens de serviço' do
 			carrier: star
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'
@@ -119,7 +178,15 @@ describe 'Usuário vê ordens de serviço' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'
@@ -130,11 +197,6 @@ describe 'Usuário vê ordens de serviço' do
 		expect(page).to have_content 'Ordens de serviço'
 		expect(page).to have_content 'Não existem ordens de serviço cadastradas.'
 	end
-
-	it 'ADM: e volta para tela onde todas as ordens de serviço são listadas' do
-	end
-
-
 
 	it 'a partir da página de detalhes de uma transportadora' do
 		# Arrange
@@ -149,13 +211,66 @@ describe 'Usuário vê ordens de serviço' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
 		click_on 'Ordens de serviço'
+
+		# Assert
+		expect(current_path).to eq orders_path
+	end
+
+	it 'e não vê ordens de serviço de outras transportadoras' do
+		# Arrange
+		acme = Carrier.create!(
+			corporate_name: 'ACME LTDA',
+			brand_name: 'ACME',
+			registration_number: '12242556123245',
+			full_address: 'Av. das Nações, 1000',
+			city: 'Bauru',
+			state: 'SP',
+			email_domain: 'acme.com.br',
+			activated: true
+		)
+
+		star = Carrier.create!(
+			corporate_name: 'Star LTDA',
+			brand_name: 'Star',
+			registration_number: '12242556123282',
+			full_address: 'Av. das Flores, 3200',
+			city: 'Limeira',
+			state: 'SP',
+			email_domain: 'star.com',
+			activated: true
+		)
+
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
+		# Act
+		login_as(user)
+		visit root_path
+		within('nav') do
+			click_on 'Transportadoras'
+		end
+		visit orders_path( carrier_id: star.id )
 
 		# Assert
 		expect(current_path).to eq orders_path
@@ -208,7 +323,16 @@ describe 'Usuário vê ordens de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -298,7 +422,16 @@ describe 'Usuário vê ordens de serviço' do
 			carrier: star
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: star.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -336,7 +469,16 @@ describe 'Usuário vê ordens de serviço' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -364,7 +506,16 @@ describe 'Usuário vê ordens de serviço' do
 			activated: true
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'

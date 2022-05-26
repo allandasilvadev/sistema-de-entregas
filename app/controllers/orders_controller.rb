@@ -1,24 +1,53 @@
 class OrdersController < ApplicationController
+	before_action :authenticate_user!, only: [:index, :all, :show, :new, :create, :edit, :update, :getOne, :destroy, :accept, 
+		:accept_update, :update_status, :upd_status]
+	
 	def index
-		@carrier = Carrier.find( params[:carrier_id] )
-		@orders = Order.where( carrier_id: params[:carrier_id] )
+		# @carrier = Carrier.find( params[:carrier_id] )
+		# @orders = Order.where( carrier_id: params[:carrier_id] )
+		@carrier = Carrier.find( current_user.carrier_id )
+		@orders = Order.where( carrier_id: current_user.carrier_id )
 	end
 
 	def all
-		@orders = Order.all
+		if current_user.role != 'administrator'
+			flash[:notice] = 'Você não pode visualizar ordens de serviço de outras transportadoras.'
+			redirect_to orders_path
+		else
+			@orders = Order.all
+		end
+		
 	end
 
 	def show
 		@all_status = { "aceita" => "aceita", "pendente" => "pendente", "in_progress" => 'Em andamento', "finished" => 'Finalizada', "canceled" => 'Cancelada' }
-		@order = Order.find( params[:id] )
+		if current_user.role != 'administrator'
+			# redirect_to orders_path	
+			@order = Order.find( params[:id] )
+			if @order.carrier.id != current_user.carrier_id
+				redirect_to orders_path
+			end 
+		else
+			@order = Order.find( params[:id] )
+		end
 	end
 
 	def new
+		# somente administradores poderão cadastrar novas ordens de serviço.
+		if current_user.role != 'administrator'
+			redirect_to orders_path
+  	end
+
 		@order = Order.new
 		@carriers = Carrier.all
 	end
 
 	def create
+		# somente administradores poderão cadastrar novas ordens de serviço.
+		if current_user.role != 'administrator'
+			redirect_to orders_path
+  	end
+
 		@carriers = Carrier.all
 		@carrier = Carrier.find(params[:order][:carrier_id])
 		# strong parameters
@@ -37,6 +66,12 @@ class OrdersController < ApplicationController
 	end
 
 	def edit
+		# somente administradores poderão editar ordens de serviço.
+		# usuarios de transportadora só poderão editar a localização e o status
+		if current_user.role != 'administrator'
+			redirect_to orders_path
+  	end
+
 		@carriers = Carrier.all
 		@order = Order.find( params[:id] )
 
@@ -48,6 +83,12 @@ class OrdersController < ApplicationController
 	end
 
 	def update
+		# somente administradores poderão editar ordens de serviço.
+		# usuarios de transportadora só poderão editar a localização e o status
+		if current_user.role != 'administrator'
+			redirect_to orders_path
+  	end
+  	
 		@carriers = Carrier.all
 		@carrier = Carrier.find(params[:order][:carrier_id])
 		# strong parameters
@@ -63,10 +104,20 @@ class OrdersController < ApplicationController
 	end
 
 	def getOne
-		@order = Order.find( params[:id] )
+		if current_user.role != 'administrator'
+			redirect_to orders_path
+		else
+			@order = Order.find( params[:id] )
+		end
+			
 	end
 
 	def destroy
+		# somente administradores poderão excluir ordens de serviço
+		if current_user.role != 'administrator'
+			redirect_to orders_path
+  	end
+
 		@order = Order.find(params[:id])
     @order.destroy    
     @orders = Order.all
@@ -75,11 +126,27 @@ class OrdersController < ApplicationController
   end
 
   def accept
+  	if current_user.role != 'administrator'
+  		@order = Order.find( params[:id] )
+  		
+  		if @order.carrier.id != current_user.carrier_id
+				redirect_to orders_path
+			end 
+  	end
+
   	@vehicles = Vehicle.where( params[:carrier_id] )
   	@order = Order.find( params[:id] )
   end
 
   def accept_update
+  	if current_user.role != 'administrator'
+  		@order = Order.find( params[:id] )
+  		
+  		if @order.carrier.id != current_user.carrier_id
+				redirect_to orders_path
+			end 
+  	end
+
   	@carriers = Carrier.all
 		@carrier = Carrier.find(params[:order][:carrier_id])
 		# strong parameters
@@ -97,12 +164,30 @@ class OrdersController < ApplicationController
 
 
   def update_status
-  	@order = Order.find( params[:id] )
   	@all_status = { "aceita" => "aceita", "in_progress" => 'Em andamento', "finished" => 'Finalizada', "canceled" => 'Cancelada' }
+
+  	if current_user.role != 'administrator'
+  		@order = Order.find( params[:id] )
+  		
+  		if @order.carrier.id != current_user.carrier_id
+				redirect_to orders_path
+			end 
+  	else
+  		@order = Order.find( params[:id] )
+  	end
   end
 
   def upd_status
   	@all_status = { "aceita" => "aceita", "pendente" => "pendente", "in_progress" => 'Em andamento', "finished" => 'Finalizada', "canceled" => 'Cancelada' }
+
+  	if current_user.role != 'administrator'
+  		@order = Order.find( params[:id] )
+  		
+  		if @order.carrier.id != current_user.carrier_id
+				redirect_to orders_path
+			end 
+  	end
+
   	@carriers = Carrier.all
 		@carrier = Carrier.find(params[:order][:carrier_id])
 		# strong parameters
@@ -118,6 +203,7 @@ class OrdersController < ApplicationController
 		end
   end
 
+  # não é necessário autenticacao
   def open_orders
   	@all_status = { "aceita" => "aceita", "pendente" => "pendente", "in_progress" => 'Em andamento', "finished" => 'Finalizada', "canceled" => 'Cancelada' }
   	if params[:code]

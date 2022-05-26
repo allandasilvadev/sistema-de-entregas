@@ -48,7 +48,15 @@ describe 'Usuário edita ordens de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'
@@ -106,7 +114,15 @@ describe 'Usuário edita ordens de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'
@@ -174,7 +190,15 @@ describe 'Usuário edita ordens de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'
@@ -230,7 +254,15 @@ describe 'Usuário edita ordens de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'
@@ -285,7 +317,15 @@ describe 'Usuário edita ordens de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'
@@ -337,7 +377,15 @@ describe 'Usuário edita ordens de serviço' do
 			carrier: acme
 		)
 
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Visualizar ordens de serviço'

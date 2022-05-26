@@ -14,6 +14,18 @@
   </div>
 
   <div class="field">
+    <%= f.label :role, 'Nível' %><br>
+    <% roles = { "administrator" => "Administrador", "carrier" => "Transportadora" } %>
+    <%= f.collection_select :role, roles, :first, :last %>
+  </div>
+
+  <div class="field">
+    <%= f.label :carrier_id, 'Transportadora' %><br>
+    <% @carriers = Carrier.all %>
+    <%= f.collection_select :carrier_id, @carriers, :id, :brand_name %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>

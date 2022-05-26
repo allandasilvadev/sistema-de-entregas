@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário cadastra uma nova faixa de preço para uma transportadora' do
 	it 'a partir da tela de detalhes da transportadora' do
 		# Arrange
-		Carrier.create!(
+		acme = Carrier.create!(
 			corporate_name: 'ACME LTDA',
 			brand_name: 'ACME',
 			registration_number: '12242556123245',
@@ -14,7 +14,16 @@ describe 'Usuário cadastra uma nova faixa de preço para uma transportadora' do
 			activated: true
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -34,7 +43,7 @@ describe 'Usuário cadastra uma nova faixa de preço para uma transportadora' do
 
 	it 'com sucesso' do
 		# Arrange
-		Carrier.create!(
+		acme = Carrier.create!(
 			corporate_name: 'ACME LTDA',
 			brand_name: 'ACME',
 			registration_number: '12242556123245',
@@ -45,7 +54,16 @@ describe 'Usuário cadastra uma nova faixa de preço para uma transportadora' do
 			activated: true
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -71,7 +89,7 @@ describe 'Usuário cadastra uma nova faixa de preço para uma transportadora' do
 
 	it 'com dados imcompletos' do
 		# Arrange
-		Carrier.create!(
+		acme = Carrier.create!(
 			corporate_name: 'ACME LTDA',
 			brand_name: 'ACME',
 			registration_number: '12242556123245',
@@ -82,7 +100,16 @@ describe 'Usuário cadastra uma nova faixa de preço para uma transportadora' do
 			activated: true
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -107,7 +134,7 @@ describe 'Usuário cadastra uma nova faixa de preço para uma transportadora' do
 
 	it 'com dados inválidos' do
 		# Arrange
-		Carrier.create!(
+		acme = Carrier.create!(
 			corporate_name: 'ACME LTDA',
 			brand_name: 'ACME',
 			registration_number: '12242556123245',
@@ -118,7 +145,16 @@ describe 'Usuário cadastra uma nova faixa de preço para uma transportadora' do
 			activated: true
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -153,7 +189,16 @@ describe 'Usuário cadastra uma nova faixa de preço para uma transportadora' do
 			activated: true
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'

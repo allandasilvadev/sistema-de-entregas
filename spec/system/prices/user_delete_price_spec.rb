@@ -23,7 +23,16 @@ describe 'Usuário remove uma faixa de preço' do
 			carrier: acme
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -71,7 +80,16 @@ describe 'Usuário remove uma faixa de preço' do
 			carrier: acme
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'

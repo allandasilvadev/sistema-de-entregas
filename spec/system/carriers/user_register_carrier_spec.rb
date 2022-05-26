@@ -3,8 +3,15 @@ require 'rails_helper'
 describe 'Usuário cadastra uma transportadora' do
 	it 'a partir da tela de listagem das transportadoras' do
 		# Arrange
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
 
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -23,10 +30,52 @@ describe 'Usuário cadastra uma transportadora' do
 		expect(page).to have_field('Status')
 	end
 
-	it 'com sucesso' do
+	it 'a partir da tela de listagem das transportadoras, e não é um administrator' do
 		# Arrange
+		acme = Carrier.create!(
+			corporate_name: 'ACME LTDA',
+			brand_name: 'ACME',
+			registration_number: '12242556123245',
+			full_address: 'Av. das Nações, 1000',
+			city: 'Bauru',
+			state: 'SP',
+			email_domain: 'acme.com.br',
+			activated: true
+		)
+
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
 
 		# Act
+		login_as(user)
+		visit root_path
+		within('nav') do
+			click_on 'Transportadoras'
+		end
+		click_on 'Cadastrar Transportadora'
+
+		# Assert
+		# verifica se todos os campos necessarios existem.
+		expect(current_path).to eq root_path
+		expect(page).to have_content 'Somente administradores podem cadastrar novas transportadoras.'
+	end
+
+	it 'com sucesso' do
+		# Arrange
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
+		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -51,8 +100,15 @@ describe 'Usuário cadastra uma transportadora' do
 
 	it 'com dados imcompletos' do
 		# Arrange
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
 
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -71,7 +127,15 @@ describe 'Usuário cadastra uma transportadora' do
 
 	it 'ou volta para listagem de transportadoras' do
 		# Arrange
+		user = User.create!(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '123456',
+			role: 'administrator'
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário vê tabela de preços' do
 	it 'a partir da página de detalhes da transportadora' do
 		# Arrange
-		Carrier.create!(
+		acme = Carrier.create!(
 			corporate_name: 'ACME LTDA',
 			brand_name: 'ACME',
 			registration_number: '12242556123245',
@@ -14,7 +14,16 @@ describe 'Usuário vê tabela de preços' do
 			activated: true
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -58,7 +67,16 @@ describe 'Usuário vê tabela de preços' do
 			carrier: acme
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -93,7 +111,16 @@ describe 'Usuário vê tabela de preços' do
 			activated: true
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'
@@ -119,7 +146,16 @@ describe 'Usuário vê tabela de preços' do
 			activated: true
 		)
 
+		user = User.create(
+			name: 'Maria',
+			email: 'maria@email.com',
+			password: '1235678',
+			role: 'carrier',
+			carrier_id: acme.id
+		)
+
 		# Act
+		login_as(user)
 		visit root_path
 		within('nav') do
 			click_on 'Transportadoras'

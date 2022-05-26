@@ -1,19 +1,42 @@
 class VehiclesController < ApplicationController
+	before_action :authenticate_user!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+
 	def index
-		@vehicles = Vehicle.where( carrier_id: params[:carrier_id] )
+		if current_user.role != 'administrator'
+			@vehicles = Vehicle.where( carrier_id: current_user.carrier_id )
+		else
+			@vehicles = Vehicle.where( carrier_id: params[:carrier_id] )
+		end		
 	end
 
 	def show
-		@vehicle = Vehicle.find(params[:id])
+		if current_user.role != 'administrator'
+			@vehicle = Vehicle.find(params[:id])
+			if @vehicle.carrier_id != current_user.carrier_id
+				redirect_to vehicles_path
+			end
+		else
+			@vehicle = Vehicle.find(params[:id])
+		end
+		
 	end
 
 	def new
-		@carrier = Carrier.find(params[:carrier_id])
-		@vehicle = Vehicle.new
+		if current_user.role != 'administrator'
+			@carrier = Carrier.find(current_user.carrier_id)
+		else
+			@carrier = Carrier.find(params[:carrier_id])			
+		end
+		@vehicle = Vehicle.new		
 	end
 
 	def create
-		@carrier = Carrier.find(params[:vehicle][:carrier_id])
+		if current_user.role != 'administrator'
+			@carrier = Carrier.find(current_user.carrier_id)
+		else
+			@carrier = Carrier.find(params[:vehicle][:carrier_id])
+		end
+		# @carrier = Carrier.find(params[:vehicle][:carrier_id])
 		# strong parameters
 		vehicle_params = params.require(:vehicle).permit(:mockup, :brand, :year, :plate, :identification, :capacity, :carrier_id)		
 		@vehicle = Vehicle.new(vehicle_params)
@@ -27,13 +50,31 @@ class VehiclesController < ApplicationController
 	end
 
 	def edit
-		@vehicle = Vehicle.find(params[:id])
+		# @vehicle = Vehicle.find(params[:id])
+		if current_user.role != 'administrator'
+			@vehicle = Vehicle.find(params[:id])
+			if @vehicle.carrier_id != current_user.carrier_id
+				redirect_to vehicles_path
+			end
+		else
+			@vehicle = Vehicle.find(params[:id])
+		end			
 	end
 
 	def update
 		# strong parameters
 		vehicle_params = params.require(:vehicle).permit(:mockup, :brand, :year, :plate, :identification, :capacity, :carrier_id)		
-		@vehicle = Vehicle.find(params[:id])
+		# @vehicle = Vehicle.find(params[:id])
+
+		if current_user.role != 'administrator'
+			@vehicle = Vehicle.find(params[:id])
+			if @vehicle.carrier_id != current_user.carrier_id
+				redirect_to vehicles_path
+			end
+		else
+			@vehicle = Vehicle.find(params[:id])
+		end			
+
 		if @vehicle.update(vehicle_params)
 			flash[:notice] = 'Veículo atualizado com sucesso.'
 			redirect_to vehicle_path( @vehicle.id )
@@ -44,7 +85,16 @@ class VehiclesController < ApplicationController
 	end
 
 	def destroy
-		@vehicle = Vehicle.find(params[:id])
+		if current_user.role != 'administrator'
+			@vehicle = Vehicle.find(params[:id])
+			if @vehicle.carrier_id != current_user.carrier_id
+				redirect_to vehicles_path
+			end
+		else
+			@vehicle = Vehicle.find(params[:id])
+		end			
+
+		# @vehicle = Vehicle.find(params[:id])
     @vehicle.destroy    
     @vehicles = Vehicle.where( carrier_id: params[:carrier_id] )
     flash[:notice] = 'Veículo removido com sucesso.'    
