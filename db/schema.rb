@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_25_144813) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_26_214944) do
   create_table "carriers", force: :cascade do |t|
     t.string "corporate_name"
     t.string "brand_name"
@@ -20,6 +20,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_25_144813) do
     t.string "state"
     t.string "email_domain"
     t.boolean "activated"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "inquiries", force: :cascade do |t|
+    t.string "carrier"
+    t.string "cubic_meter_min"
+    t.string "cubic_meter_max"
+    t.string "minimum_weight"
+    t.string "maximum_weight"
+    t.string "km_price"
+    t.string "delivery_price"
+    t.string "request_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

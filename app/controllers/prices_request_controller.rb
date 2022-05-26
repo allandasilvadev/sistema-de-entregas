@@ -1,5 +1,12 @@
 class PricesRequestController < ApplicationController
+	before_action :authenticate_user!, only: [:index, :create]
+
 	def index
+		if current_user.role != 'administrator'
+			flash[:notice] = 'Somente administradores podem fazer consultas de preços.'
+			return redirect_to root_path
+		end 
+
 		res = params[:height].to_f * params[:width].to_f * params[:depth].to_f
 		res = res / 1_000_000
 
@@ -19,5 +26,23 @@ class PricesRequestController < ApplicationController
 			render 'index'
 		end		
 		
+	end
+
+	def create
+		if current_user.role != 'administrator'
+			flash[:notice] = 'Somente administradores podem fazer consultas de preços.'
+			return redirect_to root_path
+		end 
+
+		# strong parameters
+		inquiry_params = params.permit(:carrier,:cubic_meter_min, :cubic_meter_max, :minimum_weight, :maximum_weight, :km_price, :delivery_price, :request_date)		
+		@inquiry = Inquiry.new(inquiry_params)
+		if @inquiry.save()
+			flash[:notice] = 'Consulta de preço salva com sucesso.'
+			redirect_to prices_request_index_path
+		else
+			flash.now[:notice] = 'A consulta de preço não pode ser salva.'
+			redirect_to prices_request_index_path
+		end
 	end
 end

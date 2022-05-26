@@ -43,8 +43,9 @@
 			<div class="prices-section">
 				<% if @dados.empty? %>
 				<% else %>
+				  <% i = 1 %>
 					<% @dados.each do |price| %>
-					<%
+					<%						
 						cubic_meter_min = price.cubic_meter_min.to_f / 100
 					  cubic_meter_max = price.cubic_meter_max.to_f / 100
 					  minimum_weight = price.minimum_weight.to_f / 1000 
@@ -66,7 +67,23 @@
 
 						<dt>Preço da entrega:</dt>
 						<dd>R$ <%= "%.2f" % (km_price * @distance) %></dd>
+
+						<form action="/prices_request" method="post">
+							<input type="hidden" name="carrier" value="<%= price.carrier.brand_name %>">
+							<input type="hidden" name="cubic_meter_min" value='<%= "%g" % cubic_meter_min %>cm3'>
+							<input type="hidden" name="cubic_meter_max" value='<%= "%g" % cubic_meter_max %>cm3'>
+							<input type="hidden" name="minimum_weight" value='<%= "%g" % minimum_weight %>kg'>
+							<input type="hidden" name="maximum_weight" value='<%= "%g" % maximum_weight %>kg'>
+							<input type="hidden" name="km_price" value='R$ <%= "%.2f" % km_price %>'>
+							<input type="hidden" name="delivery_price" value='R$ <%= "%.2f" % (km_price * @distance) %>'>
+							<input type="hidden" name="request_date" value='<%= Time.now.strftime("%d/%m/%Y %H:%M") %>'>
+
+							<div id="save-<%= i %>">
+								<input type="submit" value="Salvar">
+							</div>
+						</form>
 					</dl>
+					 <% i = i + 1 %>
 					<% end %>
 				<% end %>
 			</div>
