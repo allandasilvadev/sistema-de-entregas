@@ -19,7 +19,7 @@ Esse sistema de entregas permite que um fornecedor gerencie transportadoras que 
 - E-mail: treinadev@email.com
 - Senha: 123456
 
-**Obs:** caso encontre erros ao executar ao projeto, executar o comando:
+**Obs:** caso encontre erros ao executar ao projeto, executar os comandos:
 
 **$ bundle clean --force**
 
