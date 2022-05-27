@@ -1,0 +1,42 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Consultas de preços anteriores</h1>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Transportadora</th>
+						<th>Volume minímo (cm3)</th>
+						<th>Volume máximo (cm3)</th>
+						<th>Peso minímo (g)</th>
+						<th>Peso máximo (g)</th>
+						<th>Preço por km</th>
+						<th>Data da consulta</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if @inquiries.empty? %>
+					<tr>
+						<td colspan="7">
+							<p>Não existem consultas de preços anteriores.</p>
+						</td>
+					</tr>
+					<% else %>
+					  <% @inquiries.each do |inquiry| %>
+					  <tr>
+					  	<td><%= inquiry.carrier %></td>
+					  	<td><%= inquiry.cubic_meter_min %></td>
+					  	<td><%= inquiry.cubic_meter_max %></td>
+					  	<td><%= inquiry.minimum_weight %></td>
+					  	<td><%= inquiry.maximum_weight %></td>
+					  	<td><%= inquiry.km_price %></td>
+					  	<td><%= inquiry.request_date %></td>
+					  </tr>
+					  <% end %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

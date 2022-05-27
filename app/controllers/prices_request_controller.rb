@@ -1,5 +1,5 @@
 class PricesRequestController < ApplicationController
-	before_action :authenticate_user!, only: [:index, :create]
+	before_action :authenticate_user!, only: [:index, :create, :all]
 
 	def index
 		if current_user.role != 'administrator'
@@ -44,5 +44,14 @@ class PricesRequestController < ApplicationController
 			flash.now[:notice] = 'A consulta de preço não pode ser salva.'
 			redirect_to prices_request_index_path
 		end
+	end
+
+	def all
+		if current_user.role != 'administrator'
+			flash[:notice] = 'Você não pode visualizar consultas de preços feitas pelo administrator.'
+			return redirect_to root_path
+		end
+
+		@inquiries = Inquiry.all
 	end
 end

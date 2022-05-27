@@ -7,6 +7,10 @@
 				<%= link_to 'Voltar', root_path %>
 			</p>
 
+			<p>
+				<%= link_to 'Visualizar consultas de preços anteriores', prices_request_all_path %>
+			</p>
+
 			<%= form_with url: "/prices_request", method: :get do |f| %>
 			  <div class="form-group">
 			  	<%= f.label :height, 'Altura em centímetros' %><br>
