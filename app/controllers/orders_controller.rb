@@ -3,8 +3,6 @@ class OrdersController < ApplicationController
 		:accept_update, :update_status, :upd_status]
 	
 	def index
-		# @carrier = Carrier.find( params[:carrier_id] )
-		# @orders = Order.where( carrier_id: params[:carrier_id] )
 		@carrier = Carrier.find( current_user.carrier_id )
 		@orders = Order.where( carrier_id: current_user.carrier_id )
 	end
@@ -22,7 +20,6 @@ class OrdersController < ApplicationController
 	def show
 		@all_status = { "aceita" => "aceita", "pendente" => "pendente", "in_progress" => 'Em andamento', "finished" => 'Finalizada', "canceled" => 'Cancelada' }
 		if current_user.role != 'administrator'
-			# redirect_to orders_path	
 			@order = Order.find( params[:id] )
 			if @order.carrier.id != current_user.carrier_id
 				redirect_to orders_path
@@ -153,7 +150,6 @@ class OrdersController < ApplicationController
 		order_params = params.require(:order).permit(:status, :vehicle_id, :carrier_id)		
 		@order = Order.find(params[:id])		
 		if @order.carrier.id == Vehicle.find( params[:order][:vehicle_id] ).carrier_id && @order.update( order_params )
-		# if @order.update(order_params)
 			flash[:notice] = 'Ordem de serviço aceita com sucesso.'
 			redirect_to order_path( @order.id )
 		else
@@ -194,7 +190,6 @@ class OrdersController < ApplicationController
 		order_params = params.require(:order).permit(:status, :location, :date_and_time, :carrier_id)		
 		@order = Order.find(params[:id])		
 		if @order.update( order_params )
-		# if @order.update(order_params)
 			flash[:notice] = 'A localização e o status da ordem de serviço foram atualizadas com sucesso.'
 			redirect_to order_path( @order.id )
 		else

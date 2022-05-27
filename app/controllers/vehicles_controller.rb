@@ -36,7 +36,6 @@ class VehiclesController < ApplicationController
 		else
 			@carrier = Carrier.find(params[:vehicle][:carrier_id])
 		end
-		# @carrier = Carrier.find(params[:vehicle][:carrier_id])
 		# strong parameters
 		vehicle_params = params.require(:vehicle).permit(:mockup, :brand, :year, :plate, :identification, :capacity, :carrier_id)		
 		@vehicle = Vehicle.new(vehicle_params)
@@ -50,7 +49,6 @@ class VehiclesController < ApplicationController
 	end
 
 	def edit
-		# @vehicle = Vehicle.find(params[:id])
 		if current_user.role != 'administrator'
 			@vehicle = Vehicle.find(params[:id])
 			if @vehicle.carrier_id != current_user.carrier_id
@@ -64,8 +62,7 @@ class VehiclesController < ApplicationController
 	def update
 		# strong parameters
 		vehicle_params = params.require(:vehicle).permit(:mockup, :brand, :year, :plate, :identification, :capacity, :carrier_id)		
-		# @vehicle = Vehicle.find(params[:id])
-
+		
 		if current_user.role != 'administrator'
 			@vehicle = Vehicle.find(params[:id])
 			if @vehicle.carrier_id != current_user.carrier_id
@@ -94,11 +91,9 @@ class VehiclesController < ApplicationController
 			@vehicle = Vehicle.find(params[:id])
 		end			
 
-		# @vehicle = Vehicle.find(params[:id])
     @vehicle.destroy    
     @vehicles = Vehicle.where( carrier_id: params[:carrier_id] )
-    flash[:notice] = 'Veículo removido com sucesso.'    
-    # redirect_to vehicles_path
+    flash[:notice] = 'Veículo removido com sucesso.'  
     render 'index'
   end
 end

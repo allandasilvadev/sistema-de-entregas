@@ -54,8 +54,7 @@ class TermsController < ApplicationController
 	def update
 		# strong parameters
 		term_params = params.require(:term).permit(:minimum_distance, :maximum_distance, :days, :carrier_id)		
-		# @term = Term.find(params[:id])
-
+		
 		if current_user.role != 'administrator'
 			@term = Term.find(params[:id])
 			if @term.carrier_id != current_user.carrier_id
@@ -83,8 +82,6 @@ class TermsController < ApplicationController
 		else
 			@term = Term.find(params[:id])
 		end		
-		
-		# @term = Term.find(params[:id])
     @term.destroy    
     @terms = Term.where( carrier_id: params[:carrier_id] )
     flash[:notice] = 'Prazo excluído com sucesso.'  

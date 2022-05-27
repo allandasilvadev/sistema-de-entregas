@@ -11,7 +11,6 @@ describe 'Usuário vê transportadoras' do
 		end
 
 		# Assert
-		# expect(current_path).to eq carriers_path
 		expect( current_path ).to eq new_user_session_path
 	end
 
@@ -108,8 +107,6 @@ describe 'Usuário vê transportadoras' do
 		expect(page).to have_content('Transportadoras')
 		expect(page).to have_content 'Star'
 		expect(page).to have_content 'Salvador - BA'
-		# expect(current_path).to eq root_path
-		# expect(page).to have_content 'Você não tem permissão para ver essa página.'
 	end
 
 	it 'e não existem transportadoras cadastradas' do

@@ -8,7 +8,6 @@ class CarriersController < ApplicationController
 			if @carriers.empty?
 				redirect_to root_path, notice: 'Você não tem permissão para ver essa página.'
 			end
-			# redirect_to root_path, notice: 'Você não tem permissão para ver essa página.'
 		else
 			@carriers = Carrier.all
 		end
@@ -53,7 +52,6 @@ class CarriersController < ApplicationController
 	end
 
 	def edit
-		# @carrier = Carrier.find(params[:id])
 		if current_user.role != 'administrator'
 			@carrier = Carrier.find( current_user.carrier_id )
 			if params[:id] != @carrier.id
@@ -76,8 +74,6 @@ class CarriersController < ApplicationController
 		else
 			@carrier = Carrier.find(params[:id])
 		end		
-		
-		# @carrier = Carrier.find(params[:id])
 
 		if @carrier.update(carrier_params)
 			flash[:notice] = 'Transportadora atualizada com sucesso.'
@@ -90,7 +86,6 @@ class CarriersController < ApplicationController
 	end
 
 	def disable
-		# @carrier = Carrier.find(params[:id])
 		if current_user.role != 'administrator'
 			@carrier = Carrier.find( current_user.carrier_id )
 			if params[:id] != @carrier.id

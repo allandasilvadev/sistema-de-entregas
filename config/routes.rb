@@ -25,7 +25,6 @@ Rails.application.routes.draw do
 
   get '/open_orders', to: 'orders#open_orders', as: 'open_orders'
 
-  # resources :prices_request, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :prices_request, only: [:index, :create]
   get '/prices_request_all', to: 'prices_request#all', as: 'prices_request_all'
 end

@@ -89,7 +89,6 @@ describe 'Usuário vê detalhes de uma transportadora' do
 		within('nav') do
 			click_on 'Transportadoras'
 		end
-		# click_on 'ACME'
 		visit carrier_path( acme.id )
 
 		# Assert

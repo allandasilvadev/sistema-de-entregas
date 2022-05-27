@@ -18,3 +18,9 @@ Esse sistema de entregas permite que um fornecedor gerencie transportadoras que 
 #### Para acessar a área administrativa, usar as credenciais:
 - E-mail: treinadev@email.com
 - Senha: 123456
+
+**Obs:** caso encontre erros ao executar ao projeto, executar o comando:
+
+**$ bundle clean --force**
+
+**$ bundle install**

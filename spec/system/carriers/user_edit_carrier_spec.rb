@@ -81,8 +81,6 @@ describe 'Usuário edita transportadora' do
 		within('nav') do
 			click_on 'Transportadoras'
 		end
-		# click_on 'ACME'
-		# click_on 'Editar'
 		visit edit_carrier_path( star.id )
 
 		# Assert

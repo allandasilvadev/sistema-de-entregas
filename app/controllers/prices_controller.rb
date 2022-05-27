@@ -54,7 +54,6 @@ class PricesController < ApplicationController
 	def update
 		# strong parameters
 		price_params = params.require(:price).permit(:cubic_meter_min, :cubic_meter_max, :minimum_weight, :maximum_weight, :km_price, :carrier_id)		
-		# @price = Price.find(params[:id])
 		
 		if current_user.role != 'administrator'
 			@price = Price.find(params[:id])
@@ -82,10 +81,7 @@ class PricesController < ApplicationController
 			end
 		else
 			@price = Price.find(params[:id])
-		end		
-
-		# @price = Price.find(params[:id])
-		
+		end				
     @price.destroy    
     @prices = Price.where( carrier_id: params[:carrier_id] )
     flash[:notice] = 'Faixa de preço excluída com sucesso.'  
