@@ -30,12 +30,12 @@
 				</dd>
 			</dl>
 
-			<p>
+			<p class="carriers-vehicles">
 				<%= link_to 'Veículos', vehicles_path( :carrier_id => @carrier.id ) %> | 
 				<%= link_to 'Cadastrar novo veículo', new_vehicle_path( :carrier_id => @carrier.id ) %>
 			</p>
 
-			<p>
+			<p class="carriers-prices">
 				<%= link_to 'Consultar preços', prices_path( :carrier_id => @carrier.id ) %> | 
 				<%= link_to 'Cadastrar nova faixa de preço', new_price_path( :carrier_id => @carrier.id ) %>
 			</p>

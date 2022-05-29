@@ -38,7 +38,9 @@ describe 'Usuário edita faixa de preço' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 		click_on 'Editar'
 
 		# Assert
@@ -88,7 +90,9 @@ describe 'Usuário edita faixa de preço' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 		click_on 'Editar'
 		fill_in 'Tamanho máximo em centímetros cúbicos', with: '100'
 		fill_in 'Preço por quilômetro em centavos', with: '80'
@@ -139,7 +143,9 @@ describe 'Usuário edita faixa de preço' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 		click_on 'Editar'
 		fill_in 'Tamanho máximo em centímetros cúbicos', with: ''
 		fill_in 'Preço por quilômetro em centavos', with: ''
@@ -190,7 +196,9 @@ describe 'Usuário edita faixa de preço' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 		click_on 'Editar'
 		fill_in 'Tamanho máximo em centímetros cúbicos', with: '-4'
 		fill_in 'Preço por quilômetro em centavos', with: '40'
@@ -241,7 +249,9 @@ describe 'Usuário edita faixa de preço' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 		click_on 'Editar'
 		click_on 'Voltar'
 

@@ -5,10 +5,11 @@ describe 'Usuário vê transportadoras' do
 		# Arrange
 
 		# Act
-		visit root_path
-		within('nav') do
-			click_on 'Transportadoras'
-		end
+		# visit root_path
+		# within('nav') do
+			# click_on 'Transportadoras'
+		# end
+		visit carriers_path
 
 		# Assert
 		expect( current_path ).to eq new_user_session_path

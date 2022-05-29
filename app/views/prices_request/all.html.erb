@@ -3,7 +3,7 @@
 		<div class="col-md-12">
 			<h1>Consultas de preços anteriores</h1>
 
-			<table>
+			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th>Transportadora</th>
@@ -19,7 +19,7 @@
 					<% if @inquiries.empty? %>
 					<tr>
 						<td colspan="7">
-							<p>Não existem consultas de preços anteriores.</p>
+							<p class="text-center">Não existem consultas de preços anteriores.</p>
 						</td>
 					</tr>
 					<% else %>

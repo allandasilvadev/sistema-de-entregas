@@ -1,23 +1,7 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">
-			<h1 class="text-center">Sistema de entregas</h1>
-
-			<nav>
-				<%= link_to 'Transportadoras', carriers_path %> | 
-				<%= link_to 'Veículos', vehicles_path %> | 
-				<%= link_to 'Visualizar ordens de serviço', orders_all_path %> | 
-				<%= link_to 'Cadastrar nova ordem de serviço', new_order_path %> | 
-				<%= link_to 'Consultar sua entrega', open_orders_path %> | 
-				<%= link_to 'Consultar preços', prices_request_index_path %> | 
-				<% if user_signed_in? %>
-				  <%= current_user.email %>
-				  <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
-				<% else %>
-				  <%= link_to 'Entrar', new_user_session_path %>
-				<% end %>
-
-			</nav>
+		<div class="col-md-12">	
+			
 		</div>
 	</div>
 </div>

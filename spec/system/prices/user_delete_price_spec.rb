@@ -38,7 +38,9 @@ describe 'Usuário remove uma faixa de preço' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 		click_on 'Remover'
 
 		# Assert
@@ -95,7 +97,9 @@ describe 'Usuário remove uma faixa de preço' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 		within("td#price-#{one.id}") do
 			click_on 'Remover'
 		end

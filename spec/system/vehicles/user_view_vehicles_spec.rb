@@ -81,7 +81,9 @@ describe 'Usuário vê veículos' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Veículos'
+		within('p.carriers-vehicles') do
+			click_on 'Veículos'
+		end
 
 		# Assert
 		expect(current_path).to eq vehicles_path
@@ -153,7 +155,9 @@ describe 'Usuário vê veículos' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Veículos'
+		within('p.carriers-vehicles') do
+			click_on 'Veículos'
+		end
 
 		# Assert
 		expect(current_path).to eq vehicles_path
@@ -193,7 +197,9 @@ describe 'Usuário vê veículos' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Veículos'
+		within('p.carriers-vehicles') do
+			click_on 'Veículos'
+		end
 
 		# Assert
 		expect(current_path).to eq vehicles_path

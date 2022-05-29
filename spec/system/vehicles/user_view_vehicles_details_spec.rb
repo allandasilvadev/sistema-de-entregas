@@ -39,7 +39,9 @@ describe 'Usuário vê detalhes de um veículo' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Veículos'
+		within('p.carriers-vehicles') do
+			click_on 'Veículos'
+		end
 		click_on 'C-1731 Tractor'
 
 		# Assert
@@ -90,7 +92,9 @@ describe 'Usuário vê detalhes de um veículo' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Veículos'
+		within('p.carriers-vehicles') do
+			click_on 'Veículos'
+		end
 		click_on 'C-1731 Tractor'
 		click_on 'Voltar'
 

@@ -2,3 +2,14 @@
 @import "bootstrap";
 
 textarea { resize: none; }
+
+.btn, input, textarea { border-radius: 0px !important;}
+
+.shared-links { display: block; margin-top: 1.8em; }
+
+.user-credentials {
+	width: 40%;
+	margin: 20px auto;
+	padding: 25px;
+	border: solid 1px #dedede;
+}

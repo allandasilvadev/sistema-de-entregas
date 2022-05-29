@@ -39,7 +39,9 @@ describe 'Usuário edita veículo' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Veículos'
+		within('p.carriers-vehicles') do
+			click_on 'Veículos'
+		end
 		click_on 'C-1731 Tractor'
 		click_on 'Editar'
 
@@ -92,7 +94,9 @@ describe 'Usuário edita veículo' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Veículos'
+		within('p.carriers-vehicles') do
+			click_on 'Veículos'
+		end
 		click_on 'C-1731 Tractor'
 		click_on 'Editar'
 		fill_in 'Placa', with: 'ABC4458'
@@ -144,7 +148,9 @@ describe 'Usuário edita veículo' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Veículos'
+		within('p.carriers-vehicles') do
+			click_on 'Veículos'
+		end
 		click_on 'C-1731 Tractor'
 		click_on 'Editar'
 		fill_in 'Modelo', with: ''
@@ -195,7 +201,9 @@ describe 'Usuário edita veículo' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Veículos'
+		within('p.carriers-vehicles') do
+			click_on 'Veículos'
+		end
 		click_on 'C-1731 Tractor'
 		click_on 'Editar'
 		click_on 'Voltar'

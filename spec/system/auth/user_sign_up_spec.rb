@@ -27,7 +27,7 @@ describe 'Usuário se cadastra' do
 
 		# Act
 		visit root_path
-		within('nav') do
+		within('div.user-credentials') do
 			click_on 'Entrar'
 		end
 		click_on 'Criar conta'

@@ -29,7 +29,9 @@ describe 'Usuário vê tabela de preços' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 
 		# Assert
 		expect(current_path).to eq prices_path
@@ -82,7 +84,9 @@ describe 'Usuário vê tabela de preços' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 
 		# Assert
 		expect(current_path).to eq prices_path
@@ -126,7 +130,9 @@ describe 'Usuário vê tabela de preços' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 
 		# Assert
 		expect(current_path).to eq prices_path
@@ -161,7 +167,9 @@ describe 'Usuário vê tabela de preços' do
 			click_on 'Transportadoras'
 		end
 		click_on 'ACME'
-		click_on 'Consultar preços'
+		within('p.carriers-prices') do
+			click_on 'Consultar preços'
+		end
 		click_on 'Voltar'
 
 		# Assert

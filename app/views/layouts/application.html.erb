@@ -14,7 +14,46 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <%= flash[:notice] %>
+          <%= link_to root_path do %>
+            <h1 class="text-center">Sistema de entregas</h1>
+          <% end %>
+
+          <% if flash[:notice] %>
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <%= flash[:notice] %>
+          </div>
+          <% end %>
+
+          <nav align="center">
+
+        <% if user_signed_in? %>
+          <%= link_to 'Transportadoras', carriers_path %> | 
+          <%= link_to 'Veículos', vehicles_path %> | 
+          <%= link_to 'Visualizar ordens de serviço', orders_all_path %> | 
+          <%= link_to 'Cadastrar nova ordem de serviço', new_order_path %> |        
+          <%= link_to 'Consultar preços', prices_request_index_path %> | 
+        <% end %>
+
+        <%= link_to 'Consultar sua entrega', open_orders_path %>        
+
+      </nav>
+
+      <div class="user-credentials">
+        <% if user_signed_in? %>
+          <dl>
+            <dt>Usuário:</dt>
+            <dd><%= current_user.name %></dd>
+            <dt>E-mail:</dt>
+            <dd><%= current_user.email %></dd>
+          </dl>
+          <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+        <% else %>
+          <p class="text-center">
+            <%= link_to 'Entrar', new_user_session_path, class: 'btn btn-success' %>
+          </p>
+        <% end %>
+      </div>
         </div>
       </div>
     </div>

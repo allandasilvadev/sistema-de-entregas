@@ -7,7 +7,7 @@ describe 'Usuário se autentica' do
 
 		# Act
 		visit root_path
-		within('nav') do
+		within('div.user-credentials') do
 			click_on 'Entrar'
 		end
 		within('form') do
@@ -20,7 +20,7 @@ describe 'Usuário se autentica' do
 		expect(page).to have_content 'Login efetuado com sucesso.'
 		expect(page).not_to have_link 'Entrar'
 		expect(page).to have_button 'Sair'
-		within('nav') do
+		within('div.user-credentials') do
 			expect(page).to have_content 'joao@email.com'
 		end
 	end
@@ -31,7 +31,7 @@ describe 'Usuário se autentica' do
 
 		# Act
 		visit root_path
-		within('nav') do
+		within('div.user-credentials') do
 			click_on 'Entrar'
 		end
 		within('form') do
@@ -39,7 +39,7 @@ describe 'Usuário se autentica' do
 			fill_in 'Senha', with: '123456'
 			click_on 'Entrar'
 		end
-		within('nav') do
+		within('div.user-credentials') do
 			click_on 'Sair'
 		end
 
