@@ -52,9 +52,10 @@ describe 'Usuário faz uma consulta de preços' do
 		# Act
 		login_as(user)
 		visit root_path
-		within('nav') do
-			click_on 'Consultar preços'
-		end
+		# within('nav') do
+		#	  click_on 'Consultar preços'
+		# end
+		visit prices_request_index_path
 
 		# Assert
 		expect(current_path).to eq root_path

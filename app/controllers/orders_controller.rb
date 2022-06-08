@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
 	end
 
 	def all
-		if current_user.role != 'administrator'
+		if current_user.role != 'administrator'			
 			flash[:notice] = 'Você não pode visualizar ordens de serviço de outras transportadoras.'
 			redirect_to orders_path
 		else
@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
 		if current_user.role != 'administrator'
 			@order = Order.find( params[:id] )
 			if @order.carrier.id != current_user.carrier_id
+				flash[:notice] = 'Você não pode visualizar ordens de serviço de outras transportadoras.'
 				redirect_to orders_path
 			end 
 		else

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário vê ordens de serviço' do
+describe 'Usuário vê todas as ordens de serviço' do
 	# para administradores
 	it 'ADM: a partir da página para administradores' do
 		# Arrage
@@ -57,9 +57,7 @@ describe 'Usuário vê ordens de serviço' do
 		# Act
 		login_as(user)
 		visit root_path
-		within('nav') do
-			click_on 'Visualizar ordens de serviço'
-		end
+		visit orders_all_path
 
 		# Assert
 		expect(current_path).to eq orders_path

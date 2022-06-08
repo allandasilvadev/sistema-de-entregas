@@ -71,9 +71,7 @@ describe 'Usuário desativa transportadora' do
 		# Act
 		login_as(user)
 		visit root_path
-		within('nav') do
-			click_on 'Transportadoras'
-		end
+		visit carriers_path
 		visit disable_carrier_path( acme.id )
 
 		# Assert
@@ -152,9 +150,7 @@ describe 'Usuário desativa transportadora' do
 		# Act
 		login_as(user)
 		visit root_path
-		within('nav') do
-			click_on 'Transportadoras'
-		end
+		visit carriers_path
 		visit disable_carrier_path( acme.id )
 		select 'Deactivated', from: 'Status'
 		click_on 'Enviar'

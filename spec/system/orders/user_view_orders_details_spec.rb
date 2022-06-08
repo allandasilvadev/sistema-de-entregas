@@ -135,9 +135,7 @@ describe 'Usuário vê detalhes de uma ordem de serviço' do
 		# Act
 		login_as(user)
 		visit root_path
-		within('nav') do
-			click_on 'Visualizar ordens de serviço'
-		end
+		visit orders_all_path
 		# click_on 'ORDER1234567891'
 		visit order_get_path( order_star.id )
 

@@ -43,7 +43,7 @@ describe 'Usuário edita transportadora' do
 		expect(page).to have_field('Status', with: 'true')
 	end
 
-	it 'a partir da página de detalhes, e não é um administrator' do
+	it 'a partir da página de detalhes, um usuário do tipo transportadora tenta editar os dados de outra transportadora' do
 		# Arrange
 		star = Carrier.create!(
 			corporate_name: 'Star LTDA',
@@ -196,7 +196,7 @@ describe 'Usuário edita transportadora' do
 		login_as(user)
 		visit root_path
 		within('nav') do
-			click_on 'Transportadoras'
+		 click_on 'Transportadoras'
 		end
 		click_on 'ACME'
 		click_on 'Editar'

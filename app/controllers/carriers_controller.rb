@@ -16,7 +16,7 @@ class CarriersController < ApplicationController
 	def show
 		if current_user.role != 'administrator'
 			@carrier = Carrier.find( current_user.carrier_id )
-			if params[:id] != @carrier.id
+			if params[:id].to_i != @carrier.id
 					flash[:notice] = 'Você não pode visualizar as informações de outras transportadoras.'								
 			end
 		else
