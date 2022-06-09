@@ -141,12 +141,11 @@ describe 'Usuário vê consultas de preços, salvas no banco de dados' do
 		fill_in 'Distância em metros', with: '10000'
 		click_on 'Enviar'
 
-		within("div#save-1") do
+		within("div#save-#{star.id}") do
 			click_on 'Salvar'
 		end
 
-		click_on 'Visualizar consultas de preços anteriores'
-		
+		click_on 'Visualizar consultas de preços anteriores'		
 
 		# Assert
 		expect(current_path).to eq prices_request_all_path

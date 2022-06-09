@@ -46,6 +46,7 @@
 
 			<div class="prices-section">
 				<% if @dados.empty? %>
+				  <p>Nenhuma transportadora atende a essas especificações.</p>
 				<% else %>
 				  <% i = 1 %>
 					<% @dados.each do |price| %>
@@ -81,6 +82,8 @@
 							<input type="hidden" name="km_price" value='R$ <%= "%.2f" % km_price %>'>
 							<input type="hidden" name="delivery_price" value='R$ <%= "%.2f" % (km_price * @distance) %>'>
 							<input type="hidden" name="request_date" value='<%= Time.now.strftime("%d/%m/%Y %H:%M") %>'>
+
+							<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
 							<div id="save-<%= i %>">
 								<input type="submit" value="Salvar">

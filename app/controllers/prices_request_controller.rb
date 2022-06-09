@@ -12,8 +12,10 @@ class PricesRequestController < ApplicationController
 
 		if params[:search]
 			if !params[:height].empty? and !params[:width].empty? and !params[:depth].empty? and !params[:distance].empty? and !params[:weight].empty?
-				@prices = Price.where( "minimum_distance >= ? and maximum_distance >= ? and cubic_meter_min >= ? and cubic_meter_max >= ? and minimum_weight <= ? and maximum_weight >= ?", params[:distance], params[:distance], res, res, params[:weight], params[:weight] )
+				# @prices = Price.where( "minimum_distance >= ? and maximum_distance >= ? and cubic_meter_min >= ? and cubic_meter_max >= ? and minimum_weight <= ? and maximum_weight >= ?", params[:distance], params[:distance], res, res, params[:weight], params[:weight] )
+				@prices = Price.where( "cubic_meter_min >= ? and cubic_meter_max >= ? and minimum_weight <= ? and maximum_weight >= ?", res, res, params[:weight], params[:weight] )
 				@dados = @prices
+				
 				@distance = params[:distance].to_f / 1000
 				render 'index'
 			else
