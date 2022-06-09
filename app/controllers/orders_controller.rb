@@ -132,7 +132,7 @@ class OrdersController < ApplicationController
 			end 
   	end
 
-  	@vehicles = Vehicle.where( params[:carrier_id] )
+  	@vehicles = Vehicle.where( carrier_id: params[:carrier_id] )
   	@order = Order.find( params[:id] )
   end
 
