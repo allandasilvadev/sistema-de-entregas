@@ -49,7 +49,13 @@
 				    </dd>
 
 				    <dt>Data da última atualização:</dt>
-				    <dd><%= @dados['date_and_time'] %></dd>
+				    <dd>
+				    	<% if @dados['date_and_time'].nil? %>				    		
+				    	  <p>Aguardando atualização</p>
+				    	<% else %>
+				    	  <%= @dados['date_and_time'] %>
+				    	<% end %>
+				    </dd>
 			  	</dl>
 			  </div>
 			<% end %>

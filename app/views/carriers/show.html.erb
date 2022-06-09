@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-4 col-md-offset-2">
 			<p><%= link_to 'Voltar', carriers_path %></p>
 			<p><%= link_to 'Editar', edit_carrier_path( @carrier.id ) %></p>
 			<p><%= link_to 'Habilitar/Desabilitar', disable_carrier_path( @carrier.id ) %></p>
@@ -30,6 +30,9 @@
 				</dd>
 			</dl>
 
+		</div>
+
+		<div class="col-md-6">
 			<p class="carriers-vehicles">
 				<%= link_to 'Veículos', vehicles_path( :carrier_id => @carrier.id ) %> | 
 				<%= link_to 'Cadastrar novo veículo', new_vehicle_path( :carrier_id => @carrier.id ) %>
@@ -49,5 +52,6 @@
 				<%= link_to 'Ordens de serviço', orders_path( :carrier_id => @carrier.id ) %>
 			</p>
 		</div>
+		
 	</div>
 </div>

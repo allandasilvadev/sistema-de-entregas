@@ -3,8 +3,13 @@ class OrdersController < ApplicationController
 		:accept_update, :update_status, :upd_status]
 	
 	def index
-		@carrier = Carrier.find( current_user.carrier_id )
-		@orders = Order.where( carrier_id: current_user.carrier_id )
+		if current_user.role != 'administrator'
+			@carrier = Carrier.find( current_user.carrier_id )
+			@orders = Order.where( carrier_id: current_user.carrier_id )
+		else
+			@carrier = Carrier.find( params[:carrier_id] )
+			@orders = Order.where( carrier_id: @carrier.id )
+		end
 	end
 
 	def all

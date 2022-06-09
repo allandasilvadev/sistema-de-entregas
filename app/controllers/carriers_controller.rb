@@ -88,7 +88,7 @@ class CarriersController < ApplicationController
 	def disable
 		if current_user.role != 'administrator'
 			@carrier = Carrier.find( current_user.carrier_id )
-			if params[:id] != @carrier.id
+			if params[:id].to_i != @carrier.id
 				flash[:notice] = 'Você não pode ativar ou desativar outras transportadoras.'
 			end
 		else
