@@ -31,11 +31,11 @@
           <%= link_to 'Transportadoras', carriers_path %> | 
           <%= link_to 'Veículos', vehicles_path %> | 
           <% if current_user.role == 'administrator' %>
-            <%= link_to 'Visualizar ordens de serviço', orders_all_path %> | 
+            <%= link_to 'Visualizar ordens de serviço', all_orders_path %> | 
           <% end %>
           <% if current_user.role == 'administrator' %>
             <%= link_to 'Cadastrar nova ordem de serviço', new_order_path %> |
-            <%= link_to 'Consultar preços', prices_request_index_path %> | 
+            <%= link_to 'Consultar preços', prices_request_path %> | 
           <% end %>
         <% end %>
 

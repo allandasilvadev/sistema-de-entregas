@@ -30,7 +30,7 @@ describe 'Usuário vê todas as ordens de serviço' do
 		end
 
 		# Assert
-		expect(current_path).to eq orders_all_path
+		expect(current_path).to eq all_orders_path
 	end
 
 	it 'ADM: a partir da página para administradores, mas não é um administrador' do
@@ -57,7 +57,7 @@ describe 'Usuário vê todas as ordens de serviço' do
 		# Act
 		login_as(user)
 		visit root_path
-		visit orders_all_path
+		visit all_orders_path
 
 		# Assert
 		expect(current_path).to eq orders_path
@@ -138,7 +138,7 @@ describe 'Usuário vê todas as ordens de serviço' do
 		end
 
 		# Assert
-		expect(current_path).to eq orders_all_path
+		expect(current_path).to eq all_orders_path
 
 		expect(page).to have_content 'Ordens de serviço'
 
@@ -191,7 +191,7 @@ describe 'Usuário vê todas as ordens de serviço' do
 		end
 
 		# Assert
-		expect(current_path).to eq orders_all_path
+		expect(current_path).to eq all_orders_path
 		expect(page).to have_content 'Ordens de serviço'
 		expect(page).to have_content 'Não existem ordens de serviço cadastradas.'
 	end

@@ -39,10 +39,10 @@ class PricesRequestController < ApplicationController
 		@inquiry = Inquiry.new(inquiry_params)
 		if @inquiry.save()
 			flash[:notice] = 'Consulta de preço salva com sucesso.'
-			redirect_to prices_request_index_path
+			redirect_to prices_request_path
 		else
 			flash.now[:notice] = 'A consulta de preço não pode ser salva.'
-			redirect_to prices_request_index_path
+			redirect_to prices_request_path
 		end
 	end
 

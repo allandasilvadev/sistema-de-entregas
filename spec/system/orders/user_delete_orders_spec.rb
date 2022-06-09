@@ -49,7 +49,7 @@ describe 'Usuário remove uma ordem de serviço' do
 		end
 
 		# Assert
-		expect(current_path).to eq orders_all_path
+		expect(current_path).to eq all_orders_path
 		expect(page).to have_content 'Ordem de serviço excluída com sucesso.'
 		expect(page).not_to have_content 'Código: ORDER1234567891'
 	end
@@ -119,7 +119,7 @@ describe 'Usuário remove uma ordem de serviço' do
 		end
 
 		# Assert
-		expect(current_path).to eq orders_all_path
+		expect(current_path).to eq all_orders_path
 		expect(page).to have_content 'Ordem de serviço excluída com sucesso.'
 		expect(page).not_to have_content 'Código: ORDER1234567891'
 		expect(page).to have_content 'Código: ORDER1234567819'

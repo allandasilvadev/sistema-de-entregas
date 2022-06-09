@@ -18,7 +18,7 @@ describe 'Usuário faz uma consulta de preços' do
 		end
 
 		# Assert
-		expect(current_path).to eq prices_request_index_path
+		expect(current_path).to eq prices_request_path
 
 		expect(page).to have_content 'Consultar preços'
 		expect(page).to have_field 'Altura em centímetros'
@@ -55,7 +55,7 @@ describe 'Usuário faz uma consulta de preços' do
 		# within('nav') do
 		#	  click_on 'Consultar preços'
 		# end
-		visit prices_request_index_path
+		visit prices_request_path
 
 		# Assert
 		expect(current_path).to eq root_path
@@ -349,7 +349,7 @@ describe 'Usuário faz uma consulta de preços' do
 		end
 
 		# Assert
-		expect(current_path).to eq prices_request_index_path
+		expect(current_path).to eq prices_request_path
 		expect(page).to have_content 'Consulta de preço salva com sucesso.'
 	end
 

@@ -135,7 +135,7 @@ describe 'Usuário vê detalhes de uma ordem de serviço' do
 		# Act
 		login_as(user)
 		visit root_path
-		visit orders_all_path
+		visit all_orders_path
 		# click_on 'ORDER1234567891'
 		visit order_get_path( order_star.id )
 
@@ -190,7 +190,7 @@ describe 'Usuário vê detalhes de uma ordem de serviço' do
 		click_on 'Voltar'
 
 		# Assert
-		expect(current_path).to eq orders_all_path
+		expect(current_path).to eq all_orders_path
 	end
 
 	it 'e vê informações adicionais' do

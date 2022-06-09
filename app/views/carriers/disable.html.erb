@@ -5,7 +5,7 @@
 
 
 
-			<%= form_with(model: @carrier, url: '/carriers/disable', method: :post) do |f| %>
+			<%= form_with(model: @carrier, url: '/carriers/disable_post', method: :post) do |f| %>
 			  <div class="form-group">
 			  	<%= f.label :activated %><br>
 			  	<%= f.select(:activated, [['Activated', true], ['Deactivated', false]], { selected: true }, { :class => 'form-control' }) %>

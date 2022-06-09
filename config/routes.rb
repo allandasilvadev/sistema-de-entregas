@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
-  resources :carriers, only: [:index, :show, :new, :create, :edit, :update]
-  get '/carriers/:id/disable', to: 'carriers#disable', as: 'disable_carrier'
-  post '/carriers/disable', to: 'carriers#disable_post', as: 'disable_carrier_post'
+  
+  resources :carriers, only: [:index, :show, :new, :create, :edit, :update] do
+    get 'disable', on: :member
+    post 'disable_post', on: :collection
+  end
 
   resources :vehicles, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
@@ -11,11 +13,14 @@ Rails.application.routes.draw do
 
   resources :terms, only: [:index, :new, :create, :edit, :update, :destroy]
 
-  resources :orders, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  get '/orders_all/', to: 'orders#all', as: 'orders_all'
-  get '/orders_one/:id', to: 'orders#getOne', as: 'order_get'
-  get '/orders_accept/:id', to: 'orders#accept', as: 'order_accept'
+  resources :orders, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    get 'all', on: :collection
+    get 'open', on: :collection
+  end
 
+  get '/orders_one/:id', to: 'orders#getOne', as: 'order_get'
+
+  get '/orders_accept/:id', to: 'orders#accept', as: 'order_accept'
   put '/orders_accept/:id', to: 'orders#accept_update'
   patch '/orders_accept/:id', to: 'orders#accept_update'
 
@@ -23,8 +28,8 @@ Rails.application.routes.draw do
   put   '/orders_update_status/:id', to: 'orders#upd_status'
   patch '/orders_update_status/:id', to: 'orders#upd_status'
 
-  get '/open_orders', to: 'orders#open_orders', as: 'open_orders'
-
-  resources :prices_request, only: [:index, :create]
-  get '/prices_request_all', to: 'prices_request#all', as: 'prices_request_all'
+  get 'prices_request', to: 'prices_request#index', as: 'prices_request'
+  post 'prices_request', to: 'prices_request#create'
+  get 'prices_request/all', to: 'prices_request#all', as: 'prices_request_all'
+  
 end

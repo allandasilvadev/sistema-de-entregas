@@ -238,6 +238,6 @@ describe 'Usuário cadastra uma nova ordem de serviço' do
 		click_on 'Voltar'
 
 		# Assert
-		expect(current_path).to eq orders_all_path
+		expect(current_path).to eq all_orders_path
 	end
 end

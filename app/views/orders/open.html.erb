@@ -8,7 +8,7 @@
 				<%= link_to 'Voltar', root_path %>
 			</p>
 
-			<%= form_with url: "/open_orders", method: :get do |f| %>
+			<%= form_with url: "/orders/open", method: :get do |f| %>
 			  <div class="form-group">
 			  	<%= f.label :code, 'Código da entrega' %><br>
           <%= f.text_field :code, class: 'form-control' %> 

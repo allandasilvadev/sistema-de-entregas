@@ -120,7 +120,7 @@ class OrdersController < ApplicationController
     @order.destroy    
     @orders = Order.all
     flash[:notice] = 'Ordem de serviço excluída com sucesso.'  
-    redirect_to orders_all_path
+    redirect_to all_orders_path
   end
 
   def accept
@@ -200,14 +200,14 @@ class OrdersController < ApplicationController
   end
 
   # não é necessário autenticacao
-  def open_orders
+  def open
   	@all_status = { "aceita" => "aceita", "pendente" => "pendente", "in_progress" => 'Em andamento', "finished" => 'Finalizada', "canceled" => 'Cancelada' }
   	if params[:code]
   		@order = Order.where(code: params[:code]).first
   		if @order.nil?
   			@dados = []
   			flash[:notice] = 'O código informado está incorreto.'
-  			render 'open_orders'
+  			render 'open'
   		else
   			@dados = { 
 	  			"code" => @order.code, 
@@ -221,7 +221,7 @@ class OrdersController < ApplicationController
   		end  		
   	else
   		@dados = []
-  		render 'open_orders'
+  		render 'open'
   	end
   end
 
